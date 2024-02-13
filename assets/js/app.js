@@ -51,4 +51,6 @@ function recivedProductData(productData) {
      allProducts[Math.floor(Math.random() * allProducts.length)], 
      allProducts[Math.floor(Math.random() * allProducts.length)]
      );
+
+     //buildProductCard(featuredProductsArray);
 }
