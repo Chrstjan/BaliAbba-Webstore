@@ -19,10 +19,20 @@ function getCategoryData() {
 
 function getProductData() {
     fetch('https://dummyjson.com/products?limit=0')
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        } 
+        return response.json()
+     })
+     
     .then(json => {
         recivedProductData(json);
     })
+
+    .catch(error => {
+        console.log('Error fetching product data:', error);
+    });
 }
 
 function recivedCategoryData(categoryData) {
