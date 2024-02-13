@@ -52,5 +52,50 @@ function recivedProductData(productData) {
      allProducts[Math.floor(Math.random() * allProducts.length)]
      );
 
-     //buildProductCard(featuredProductsArray);
+     buildProductCard(featuredProductsArray);
+}
+
+function buildProductCard(featuredProducts) {
+    const cardsContainer = document.getElementById("cardsContainer");
+
+    console.log(featuredProducts);
+
+    featuredProducts.forEach((product) => {
+
+        const appendChildren = ((parent, elements) => {
+            elements.forEach((element) => {
+                parent.appendChild(element);
+            });
+        });
+
+        const cardContainer = document.createElement("div");
+        const cardHeaderText = document.createElement("h2");
+        cardHeaderText.textContent = product.title;
+
+        const cardThumbnail = document.createElement("img");
+        cardThumbnail.src = product.thumbnail;
+
+        const cardRatingContainer = document.createElement("span");
+
+        const cardStarRating = document.createElement("p");
+        cardStarRating.textContent = product.rating;
+
+        const randRatingAmount = Math.floor(Math.random() * 300 + 1)
+
+        const cardRatingAmount = document.createElement("p");
+        cardRatingAmount.textContent = `(${randRatingAmount} reviews)`;
+
+        appendChildren(cardRatingContainer, [
+            cardStarRating,
+            cardRatingAmount
+        ]);
+
+        appendChildren(cardContainer, [
+            cardContainer.appendChild(cardHeaderText),
+            cardContainer.appendChild(cardThumbnail),
+            cardContainer.appendChild(cardRatingContainer)
+        ]);
+        
+        cardsContainer.appendChild(cardContainer);
+    })
 }
