@@ -1,3 +1,5 @@
+const cardsContainer = document.getElementById("cardsContainer");
+
 getCategoryData();
 getProductData();
 
@@ -56,85 +58,26 @@ function recivedProductData(productData) {
 }
 
 function buildProductCard(featuredProducts) {
-    const cardsContainer = document.getElementById("cardsContainer");
-
     console.log(featuredProducts);
 
     featuredProducts.forEach((product) => {
-
-        const appendChildren = ((parent, elements) => {
-            elements.forEach((element) => {
-                parent.appendChild(element);
-            });
-        });
-
-        const cardContainer = document.createElement("div");
-
-        const cardHeader = document.createElement("header");
-        const cardHeaderText = document.createElement("h2");
-        cardHeaderText.textContent = product.title;
-        cardHeader.appendChild(cardHeaderText);
-
-        const cardFigure = document.createElement("figure");
-
-        const cardThumbnail = document.createElement("img");
-        cardThumbnail.src = product.thumbnail;
-        cardFigure.appendChild(cardThumbnail);
-
-        const cardFigcaption = document.createElement("figcaption");
-
-        const cardRatingContainer = document.createElement("span");
-
-        const cardStarRating = document.createElement("p");
-        cardStarRating.textContent = product.rating;
-
         const randRatingAmount = Math.floor(Math.random() * 3500 + 1)
 
-        const cardRatingAmount = document.createElement("p");
-        cardRatingAmount.textContent = `(${randRatingAmount} reviews)`;
+        let productCard = `
+        <figure>
+            <header><h2>${product.title}</h2></header>
+            <img src="${product.thumbnail}">
+            <figcaption>
+                <span class="test"><p>${product.rating}</p><p>(${randRatingAmount} reviews)</p></span>
+                <span class="testTwo"><h4>${product.price} £</h4><button>Add to cart</button></span>
+                <h3>${product.description}</h3>
+                <footer>
+                    <h5>${product.stock} in stock</h5>
+                </footer>
+            </figcaption>
+        </figure>
+        `;
 
-        appendChildren(cardRatingContainer, [
-            cardStarRating,
-            cardRatingAmount
-        ]);
-
-        const cardBuyContainer = document.createElement("span");
-
-        const cardPriceText = document.createElement("h3");
-        cardPriceText.textContent = `${product.price} £`;
-
-        const cardBuyBtn = document.createElement("button");
-        cardBuyBtn.textContent = "Add to cart";
-
-        appendChildren(cardBuyContainer, [
-            cardPriceText,
-            cardBuyBtn
-        ]);
-
-        const cardDescriptionText = document.createElement("h4");
-        cardDescriptionText.textContent = product.description;
-
-        const cardFooter = document.createElement("footer");
-
-        const cardFooterText = document.createElement("h5");
-        cardFooterText.textContent = `${product.stock} in stock`;
-
-        cardFooter.appendChild(cardFooterText);
-
-        appendChildren(cardFigcaption, [
-            cardRatingContainer,
-            cardBuyContainer,
-            cardDescriptionText,
-            cardFooter
-        ]);
-
-        cardFigure.appendChild(cardFigcaption);
-
-        appendChildren(cardContainer, [
-            cardHeader,
-            cardFigure,
-        ]);
-
-        cardsContainer.appendChild(cardContainer);
+        cardsContainer.innerHTML += productCard;
     })
 }
