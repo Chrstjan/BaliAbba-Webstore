@@ -2,7 +2,7 @@ getCategoryData();
 getProductData();
 
 function getCategoryData() {
-    fetch('https://dummyjson.com/products/categories')
+    fetch('https://dummyjson.com/products/categories?limit=0')
     .then(response => response.json())
     .then(json => console.log(json))
 
@@ -10,7 +10,7 @@ function getCategoryData() {
 }
 
 function getProductData() {
-    fetch('https://dummyjson.com/products')
+    fetch('https://dummyjson.com/products?limit=0')
     .then(response => response.json())
     .then(json => console.log(json))
 
