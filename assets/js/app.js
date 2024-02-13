@@ -3,10 +3,18 @@ getProductData();
 
 function getCategoryData() {
     fetch('https://dummyjson.com/products/categories?limit=0')
-    .then(response => response.json())
+    .then(response => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok');
+         }
+        return response.json()
+     })
     .then(json => {
         recivedCategoryData(json);
     })
+    .catch(error => {
+        console.log('Error fetching category data:', error);
+    });
 }
 
 function getProductData() {
@@ -18,7 +26,8 @@ function getProductData() {
 }
 
 function recivedCategoryData(categoryData) {
-    console.log(categoryData);
+    const categoryArray = categoryData.map(category => [category]);
+    console.log(categoryArray);
 }
 
 function recivedProductData(productData) {
