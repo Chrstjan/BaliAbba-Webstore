@@ -64,7 +64,7 @@ function buildProductCard(featuredProducts) {
         const randRatingAmount = Math.floor(Math.random() * 3500 + 1)
 
         let productCard = `
-        <figure>
+        <figure onclick='buildProductDetails(${product.id})'>
             <header><h2>${product.title}</h2></header>
             <img src="${product.thumbnail}">
             <figcaption>
@@ -79,5 +79,11 @@ function buildProductCard(featuredProducts) {
         `;
 
         cardsContainer.innerHTML += productCard;
-    })
+    });
+}
+
+function buildProductDetails(productData) {
+    cardsContainer.innerHTML = "";
+
+    console.log(productData);
 }
