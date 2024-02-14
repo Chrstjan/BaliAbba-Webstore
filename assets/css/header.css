@@ -22,6 +22,8 @@
 
 .main-nav #basket-img {
     filter: invert(100%);
+    padding-right: 0.6rem;
+    width: 10vw;
 }
 
 .main-nav #hamburger {
