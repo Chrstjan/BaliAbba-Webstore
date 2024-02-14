@@ -16,6 +16,10 @@
     padding-right: 1rem;
 }
 
+.main-nav #basket-img {
+    filter: invert(100%);
+}
+
 .main-nav #hamburger {
     display: block;
 }
