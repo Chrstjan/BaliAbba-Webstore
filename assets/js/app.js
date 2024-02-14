@@ -64,12 +64,12 @@ function buildProductCard(featuredProducts) {
         const randRatingAmount = Math.floor(Math.random() * 3500 + 1)
 
         let productCard = `
-        <figure onclick='buildProductDetails(${product.id})'>
+        <figure class="product-card" onclick='buildProductDetails(${product.id})'>
             <header><h2>${product.title}</h2></header>
             <img src="${product.thumbnail}">
             <figcaption>
-                <span class="test"><p>${product.rating}</p><p>(${randRatingAmount} reviews)</p></span>
-                <span class="testTwo"><h4>${product.price} £</h4><button>Add to cart</button></span>
+                <span class="rating"><p>${product.rating}</p><p>(${randRatingAmount} reviews)</p></span>
+                <span class="price"><h4>${product.price} £</h4><button>Add to cart</button></span>
                 <h3>${product.description}</h3>
                 <footer>
                     <h5>${product.stock} in stock</h5>
