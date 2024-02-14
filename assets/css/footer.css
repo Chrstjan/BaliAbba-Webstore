@@ -1,3 +1,44 @@
+.main-footer {
+    background: #1C1C1C;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-footer h3,
+.main-footer h4 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.contact-info,
+.FAQ {
+    padding: 0;
+    padding: 0rem 0.7rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.follow-us {
+    padding: 0;
+    padding: 0rem 0.7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.main-footer .contact-info li,
+.FAQ li a,
+.follow-us li{
+    list-style-type: none;
+    color: #fff;
+    text-decoration: none;
+}
+
 .facebook-soMe,
 .instagram-soMe,
 .linkedin-soMe {
