@@ -7,6 +7,10 @@
     color: #fff;
 }
 
+.main-header h1 {
+    padding-left: 0.6rem;
+}
+
 .main-header .main-nav {
     display: flex;
     flex-direction: row;
