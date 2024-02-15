@@ -74,7 +74,13 @@ function buildProductCard(featuredProducts) {
             <header><h2>${product.title}</h2></header>
             <img src="${product.thumbnail}">
             <figcaption>
-                <span class="rating"><p>${product.rating}</p><p>(${randRatingAmount} reviews)</p></span>
+                <span class="rating">
+                    <span class="star-amount">
+                        <p>${product.rating}</p>
+                        <p class="star">&starf;</p>
+                    </span>
+                    <p>(${randRatingAmount} reviews)</p>
+                </span>
                 <span class="price"><h4>${product.price} £</h4><button>Add to cart</button></span>
                 <h3>${product.description}</h3>
                 <footer>
@@ -117,21 +123,24 @@ function buildProductDetails(productId) {
 
     let detailedProductCard = `
         <figure class="product-card">
-            <header>${clickedProduct.title}</header>
+            <header><h2>${clickedProduct.title}</h2></header>
             <img src="${clickedProduct.thumbnail}">
             <figcaption>
                 <div class="small-images">
                     ${productImages}
                 </div>
                 <span class="rating">
-                    <p>${clickedProduct.rating}</p>
+                    <span class="star-amount">
+                        <p>${clickedProduct.rating}</p>
+                        <p class="star">&starf;</p>
+                    </span>
                     <p>(${randRatingAmount} reviews)</p>
                 </span>
-                <h4>${clickedProduct.price}</h4>
+                <h4>${clickedProduct.price} £</h4>
                 <span class="price">
                     <div class="amount">
                         <button id="subtract-btn">-</button>
-                        <p class="amount-text">0</p>
+                        <p class="amount-text">1</p>
                         <button id="add-btn">+</button>
                     </div>
                     <button>Add to cart</button>
