@@ -139,29 +139,28 @@ function buildProductDetails(productId) {
 //Temp navigation
 function buildSidebar(categoryData) {
     //Code is temp will be remade later
+    let navigation = `<button onclick="navigationCallBack('all')">All</button>`
+    hamburgerElement.innerHTML += navigation;
+
     categoryData.forEach((category) => {
         let navigation = `<button onclick="navigationCallBack('${category}')">${category}</button>`
 
         hamburgerElement.innerHTML += navigation;
     })
-
 }
 
 function navigationCallBack(clickedCategory) {
-    //Temp code for showing products of the sub category
-    console.log(clickedCategory);
+    if (clickedCategory == 'all') {
+        buildProductCard(allProducts);
+    } else {
+        let clickedSubCategoryArray = [];
 
-    let clickedSubCategory = clickedCategory;
+        allProducts.forEach((product) => {
+            if (product.category == clickedCategory) {
+                clickedSubCategoryArray.push(product);
+            }
+        });
 
-    let clickedSubCategoryArray = [];
-
-    allProducts.forEach((product) => {
-        if (product.category == clickedSubCategory) {
-            console.log(product);
-
-            clickedSubCategoryArray.push(product);
-        }
-    });
-
-    buildProductCard(clickedSubCategoryArray);
+        buildProductCard(clickedSubCategoryArray);
+    }
 }
