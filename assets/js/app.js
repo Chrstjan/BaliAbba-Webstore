@@ -63,6 +63,7 @@ function recivedProductData(productData) {
 }
 
 function buildProductCard(featuredProducts) {
+    cardsContainer.innerHTML = "";
     console.log(featuredProducts);
 
     featuredProducts.forEach((product) => {
