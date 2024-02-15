@@ -147,5 +147,20 @@ function buildSidebar(categoryData) {
 }
 
 function navigationCallBack(clickedCategory) {
+    //Temp code for showing products of the sub category
     console.log(clickedCategory);
+
+    let clickedSubCategory = clickedCategory;
+
+    let clickedSubCategoryArray = [];
+
+    allProducts.forEach((product) => {
+        if (product.category == clickedSubCategory) {
+            console.log(product);
+
+            clickedSubCategoryArray.push(product);
+        }
+    });
+
+    buildProductCard(clickedSubCategoryArray);
 }
