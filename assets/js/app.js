@@ -134,3 +134,18 @@ function buildProductDetails(productId) {
     }
 
 }
+
+//Temp navigation
+function buildSidebar(categoryData) {
+    //Code is temp will be remade later
+    categoryData.forEach((category) => {
+        let navigation = `<button onclick="navigationCallBack('${category}')">${category}</button>`
+
+        hamburgerElement.innerHTML += navigation;
+    })
+
+}
+
+function navigationCallBack(clickedCategory) {
+    console.log(clickedCategory);
+}
