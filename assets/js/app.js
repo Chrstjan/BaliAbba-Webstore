@@ -1,4 +1,5 @@
 const cardsContainer = document.getElementById("cardsContainer");
+const hamburgerElement = document.getElementById("hamburger");
 
 let allProducts = null
 
