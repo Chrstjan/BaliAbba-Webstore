@@ -1,5 +1,7 @@
 const cardsContainer = document.getElementById("cardsContainer");
 
+let allProducts = null
+
 getCategoryData();
 getProductData();
 
@@ -43,13 +45,13 @@ function recivedCategoryData(categoryData) {
 }
 
 function recivedProductData(productData) {
-    const allProducts = productData.products;
+     allProducts = productData.products;
     console.log(allProducts);
 
     //Random featured products
     const featuredProductsArray = [];
     featuredProductsArray.push(
-     allProducts[Math.floor(Math.random() * allProducts.length)],
+     allProducts[2],
      allProducts[Math.floor(Math.random() * allProducts.length)], 
      allProducts[Math.floor(Math.random() * allProducts.length)]
      );
@@ -82,8 +84,26 @@ function buildProductCard(featuredProducts) {
     });
 }
 
-function buildProductDetails(productData) {
+function buildProductDetails(productId) {
     cardsContainer.innerHTML = "";
+    let clickedProduct = null;
+    console.log(productId);
 
-    console.log(productData);
+    allProducts.forEach((product) => {
+        if (product.id == productId) {
+            clickedProduct = product;
+        }
+    })
+
+    console.log(clickedProduct);
+
+    if (clickedProduct == null) {
+        alert("lol");
+    }
+    else {
+        let detailedProductCard = `<figure><header>${clickedProduct.title}</header></figure>`
+        cardsContainer.innerHTML = detailedProductCard;
+    }
+
+
 }
