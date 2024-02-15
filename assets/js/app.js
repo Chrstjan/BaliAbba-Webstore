@@ -41,8 +41,10 @@ function getProductData() {
 }
 
 function recivedCategoryData(categoryData) {
-    const categoryArray = categoryData.map(category => [category]);
-    console.log(categoryArray);
+    // const categoryArray = categoryData.map(category => [category]);
+    console.log(categoryData);
+
+    buildSidebar(categoryData);
 }
 
 function recivedProductData(productData) {
