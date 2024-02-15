@@ -1,40 +1,78 @@
+#main-list {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1c1c1c99;
+  width: 100%;
+  height: 100%;
+  padding-top: 8rem;
+  overflow-y: scroll;
+}
+
+#main-list.show-nav {
+  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Prevents scrolling when the sidebar is open */
+body.no-scroll {
+  overflow: hidden;
+}
+
+#main-list .sidebar-category {
+  list-style-type: none;
+}
+
+.sidebar-category button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 27px;
+}
+
 .main-header {
-    background: #1C1C1C;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
+  background: #1c1c1c;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
 }
 
 .main-header h1 {
-    padding-left: 0.6rem;
+  padding-left: 0.6rem;
 }
 
 .main-header .main-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1rem;
-    padding-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 1rem;
 }
 
 .main-nav #basket-img {
-    filter: invert(100%);
-    padding-right: 0.6rem;
-    width: 10vw;
+  filter: invert(100%);
+  padding-right: 0.6rem;
+  width: 10vw;
+  z-index: 999;
 }
 
 .main-nav #hamburger {
-    display: block;
+  display: block;
+  z-index: 999;
 }
 
 #hamburger .bar {
-    margin: 4px 0;
-    width: 25px;
-    height: 7px;
-    display: block;
-    background: #fff;
-    border-radius: 5px;
+  margin: 4px 0;
+  width: 25px;
+  height: 7px;
+  display: block;
+  background: #fff;
+  border-radius: 5px;
 }
