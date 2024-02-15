@@ -101,9 +101,33 @@ function buildProductDetails(productId) {
         alert("lol");
     }
     else {
-        let detailedProductCard = `<figure><header>${clickedProduct.title}</header></figure>`
-        cardsContainer.innerHTML = detailedProductCard;
+        buildCard(clickedProduct);
     }
 
+    function buildCard(clickedProduct) {
+        const randRatingAmount = Math.floor(Math.random() * 3500 + 1)
+        let smallProductImages = clickedProduct.images;
+
+        let detailedProductCard = `
+        <figure class="product-card">
+            <header>${clickedProduct.title}</header>
+            <img src="${clickedProduct.thumbnail}">
+            <figcaption>
+                <div class="small-images">
+                    <img class="small-img" src="${smallProductImages[0]}"
+                </div>
+                <span class="rating">
+                    <p>${clickedProduct.rating}</p>
+                    <p>(${randRatingAmount} reviews)</p>
+                </span>
+                <h4>${clickedProduct.price}</h4>
+                <span class="price">
+                    <p> + Temp amount - </p>
+                    <button>Add to cart</button>
+                </span>
+            </figcaption>
+        </figure>`
+        cardsContainer.innerHTML = detailedProductCard;
+    }
 
 }
