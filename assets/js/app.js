@@ -1,5 +1,10 @@
 const cardsContainer = document.getElementById("cardsContainer");
-const hamburgerElement = document.getElementById("hamburger");
+const hamburgerBtn = document.getElementById("hamburger");
+const mainNav = document.getElementById("main-list");
+
+hamburgerBtn.addEventListener("click", () => {
+  mainNav.classList.toggle("show-nav");
+});
 
 let allProducts = null;
 
@@ -158,13 +163,13 @@ function buildProductDetails(productId) {
 //Temp navigation
 function buildSidebar(categoryData) {
   //Code is temp will be remade later
-  let navigation = `<button onclick="navigationCallBack('all')">All</button>`;
-  hamburgerElement.innerHTML += navigation;
+  let navigation = `<li><button onclick="navigationCallBack('all')">All</button></li>`;
+  mainNav.innerHTML += navigation;
 
   categoryData.forEach((category) => {
-    let navigation = `<button onclick="navigationCallBack('${category}')">${category}</button>`;
+    let navigation = `<li><button onclick="navigationCallBack('${category}')">${category}</button></li>`;
 
-    hamburgerElement.innerHTML += navigation;
+    mainNav.innerHTML += navigation;
   });
 }
 
