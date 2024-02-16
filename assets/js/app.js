@@ -1,3 +1,4 @@
+//#region GLOBAL code
 const cardsContainer = document.getElementById("cardsContainer");
 const hamburgerBtn = document.getElementById("hamburger");
 const mainNav = document.getElementById("main-list");
@@ -13,6 +14,9 @@ let allProducts = null;
 
 getCategoryData();
 getProductData();
+//#endregion GLOBAL code
+
+//#region model code
 
 function getCategoryData() {
   fetch("https://dummyjson.com/products/categories?limit=0")
@@ -48,6 +52,9 @@ function getProductData() {
     });
 }
 
+//#endregion model code
+
+//#region controller code
 function recivedCategoryData(categoryData) {
   // const categoryArray = categoryData.map(category => [category]);
   console.log(categoryData);
@@ -70,6 +77,24 @@ function recivedProductData(productData) {
   buildProductCard(featuredProductsArray);
 }
 
+function navigationCallBack(clickedCategory) {
+  if (clickedCategory == "all") {
+    buildProductCard(allProducts);
+  } else {
+    let clickedSubCategoryArray = [];
+
+    allProducts.forEach((product) => {
+      if (product.category == clickedCategory) {
+        clickedSubCategoryArray.push(product);
+      }
+    });
+
+    buildProductCard(clickedSubCategoryArray);
+  }
+}
+//#endregion controller code
+
+//#region view code
 function buildProductCard(featuredProducts) {
   cardsContainer.innerHTML = "";
   console.log(featuredProducts);
@@ -176,18 +201,4 @@ function buildSidebar(categoryData) {
   });
 }
 
-function navigationCallBack(clickedCategory) {
-  if (clickedCategory == "all") {
-    buildProductCard(allProducts);
-  } else {
-    let clickedSubCategoryArray = [];
-
-    allProducts.forEach((product) => {
-      if (product.category == clickedCategory) {
-        clickedSubCategoryArray.push(product);
-      }
-    });
-
-    buildProductCard(clickedSubCategoryArray);
-  }
-}
+//#endregion view code
