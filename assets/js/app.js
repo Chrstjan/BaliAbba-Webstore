@@ -93,6 +93,13 @@ function navigationCallBack(clickedCategory) {
     buildProductCard(clickedSubCategoryArray);
   }
 }
+
+function removeLoadingAnimation() {
+  const loadingContainer = document.querySelector(".loading-container");
+  if (loadingContainer) {
+    loadingContainer.remove();
+  }
+}
 //#endregion controller code
 
 //#region view code
@@ -108,14 +115,6 @@ function buildLoadingAnimation(){
 
   cardsContainer.innerHTML = loadingAnimation;
 };
-
-function removeLoadingAnimation() {
-  const loadingContainer = document.querySelector(".loading-container");
-  if (loadingContainer) {
-    loadingContainer.remove();
-  }
-}
-
 
 function buildProductCard(featuredProducts) {
   cardsContainer.innerHTML = "";
