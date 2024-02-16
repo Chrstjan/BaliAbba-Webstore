@@ -27,6 +27,7 @@ function getCategoryData() {
       return response.json();
     })
     .then((json) => {
+      buildLoadingAnimation(); 
       recivedCategoryData(json);
     })
     .catch((error) => {
@@ -42,11 +43,9 @@ function getProductData() {
       }
       return response.json();
     })
-
     .then((json) => {
-      recivedProductData(json);
+      recivedProductData(json); // Process the received product data
     })
-
     .catch((error) => {
       console.log("Error fetching product data:", error);
     });
@@ -95,6 +94,20 @@ function navigationCallBack(clickedCategory) {
 //#endregion controller code
 
 //#region view code
+function buildLoadingAnimation(){
+  //This is only temp testing
+  cardsContainer.innerHTML = "";
+
+  const loadingAnimation = `
+  <div class="loading-container">
+    <div class="loading"></div>
+    <h2>Loading...</h2>
+  </div>`
+
+  cardsContainer.innerHTML = loadingAnimation;
+};
+
+
 function buildProductCard(featuredProducts) {
   cardsContainer.innerHTML = "";
   console.log(featuredProducts);

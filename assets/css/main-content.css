@@ -5,6 +5,28 @@
   align-items: center;
 }
 
+@keyframes spinAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  text-align: center;
+}
+
+#cardsContainer .loading-container .loading {
+  border: 10px solid #777;
+  padding: 7rem;
+  border-top: 10px solid #333;
+  border-radius: 50%;
+  animation: spinAnimation 1.4s linear infinite;
+}
+
 #cardsContainer .product-card {
   display: flex;
   flex-direction: column;
