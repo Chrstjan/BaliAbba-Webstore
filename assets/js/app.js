@@ -12,6 +12,7 @@ hamburgerBtn.addEventListener("click", () => {
 
 let allProducts = null;
 
+buildLoadingAnimation(); 
 getCategoryData();
 getProductData();
 //#endregion GLOBAL code
@@ -27,7 +28,6 @@ function getCategoryData() {
       return response.json();
     })
     .then((json) => {
-      buildLoadingAnimation(); 
       recivedCategoryData(json);
     })
     .catch((error) => {
@@ -44,7 +44,8 @@ function getProductData() {
       return response.json();
     })
     .then((json) => {
-      recivedProductData(json); // Process the received product data
+      recivedProductData(json);
+      removeLoadingAnimation();
     })
     .catch((error) => {
       console.log("Error fetching product data:", error);
@@ -74,6 +75,7 @@ function recivedProductData(productData) {
   );
 
   buildProductCard(featuredProductsArray);
+
 }
 
 function navigationCallBack(clickedCategory) {
@@ -106,6 +108,13 @@ function buildLoadingAnimation(){
 
   cardsContainer.innerHTML = loadingAnimation;
 };
+
+function removeLoadingAnimation() {
+  const loadingContainer = document.querySelector(".loading-container");
+  if (loadingContainer) {
+    loadingContainer.remove();
+  }
+}
 
 
 function buildProductCard(featuredProducts) {
