@@ -213,7 +213,7 @@ function buildProductDetails(productId) {
 function buildSidebar(categoryData) {
   //Code is temp will be remade later
 
-  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product " />`
+  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`
   let subTopNavigation = `
     <span class="top-nav">
       <li class="sidebar-nav"><button>Home</button></li>
