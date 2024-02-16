@@ -1,0 +1,130 @@
+#cardsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes spinAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  text-align: center;
+}
+
+#cardsContainer .loading-container .loading {
+  border: 10px solid #777;
+  padding: 7rem;
+  border-top: 10px solid #333;
+  border-radius: 50%;
+  animation: spinAnimation 1.4s linear infinite;
+}
+
+#cardsContainer .product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  border: 2px solid #1c1c1c;
+  border-radius: 10px;
+  padding: 0rem 0.5rem;
+  background: #eeeeee;
+}
+
+.product-card header {
+  border-bottom: 2px solid #1c1c1c;
+  width: 100%;
+  text-align: center;
+  padding: 0rem 0.5rem;
+}
+
+.product-card img {
+  padding-top: 0.4rem;
+  display: block;
+  width: 100%;
+}
+
+.product-card figcaption .small-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-card figcaption .small-images .small-img {
+  width: 25vw;
+  max-width: 50px;
+  height: auto;
+}
+
+.product-card figcaption .rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.rating .star-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.star-amount .star {
+  color: #d6e71d;
+  font-size: 27px;
+  padding-bottom: 0.2rem;
+}
+
+.product-card figcaption .price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.product-card figcaption .price .amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.price .amount button {
+  border-radius: 100%;
+  box-shadow: none;
+  background: #d9d9d9;
+  text-align: center;
+  font-size: 20px;
+}
+
+.product-card figcaption h4,
+.price h4 {
+  font-size: 27px;
+  text-align: center;
+}
+
+.price button {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: #85d360;
+  border: 0;
+  box-shadow: 0.2px 3px #00000033;
+}
+
+.product-card footer {
+  text-align: end;
+  font-size: 19px;
+}
