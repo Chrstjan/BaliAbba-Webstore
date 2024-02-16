@@ -212,7 +212,17 @@ function buildProductDetails(productId) {
 //Temp navigation
 function buildSidebar(categoryData) {
   //Code is temp will be remade later
+
+  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product " />`
+  let subTopNavigation = `
+    <span class="top-nav">
+      <li class="sidebar-nav"><button>Home</button></li>
+      <li class="sidebar-nav"><button>Categories</button></li>
+      <li class="sidebar-nav"><button>Login</button></li>
+    </span>`;
   let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All</button></li>`;
+  mainNav.innerHTML += topNavigation;
+  mainNav.innerHTML += subTopNavigation;
   mainNav.innerHTML += navigation;
 
   categoryData.forEach((category) => {
