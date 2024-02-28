@@ -2,12 +2,16 @@
 const cardsContainer = document.getElementById("cardsContainer");
 const hamburgerBtn = document.getElementById("hamburger");
 const mainNav = document.getElementById("main-list");
-
+const shoppingCartElement = document.getElementById("basket-img");
 const domBody = document.body;
 
 hamburgerBtn.addEventListener("click", () => {
   mainNav.classList.toggle("show-nav");
   domBody.classList.toggle("no-scroll");
+});
+
+shoppingCartElement.addEventListener("click", () => {
+  retrieveLocalStorage();
 });
 
 let allProducts = null;
@@ -106,6 +110,16 @@ function cartCallback(clickedProduct) {
   // console.log(productsInCart);
   let cartArray_seriallized = JSON.stringify(productsInCart);
   localStorage.setItem("cartArray", cartArray_seriallized);
+}
+
+function retrieveLocalStorage() {
+  let shoppingCart = localStorage.getItem("cartArray");
+
+  let shoppingCartArray = JSON.parse(shoppingCart);
+
+  // console.log(shoppingCartArray);
+
+  buildShoppingCart(shoppingCartArray);
 }
 
 function removeLoadingAnimation() {
