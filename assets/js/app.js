@@ -180,25 +180,27 @@ function buildShoppingCart(shoppingCart) {
 
   shoppingCart.forEach((product) => {
     let cartProduct = `
-      <figure>
-        <header>
-          <h2>${product.title}</h2>
-          <span><p>${product.brand}</p></span>
-        </header>
-        <img src="${product.thumbnail}" alt="${product.title}" />
+      <figure class="cart-product">
+        <div class="header-container">
+          <header class="product-header">
+            <h2>${product.title}</h2>
+            <span><p>${product.brand}</p></span>
+          </header>
+          <img src="${product.thumbnail}" alt="${product.title}" />
+        </div>
         <figcaption>
-          <span>
-            <div>
+          <span class="btn-container">
+            <div class="add-subtract-container">
               <button id="subtract-btn">-</button>
               <p>1</p>
               <button id="add-btn">+</button>
             </div>
-            <div>
+            <span class="product-price">
+              <h4>${product.price} £</h4>
+            </span>
+            <div class="remove-container">
               <button id="remove-btn">-</button>
             </div>
-          </span>
-          <span>
-            <h4>${product.price} £</h4>
           </span>
         </figcaption>
       </figure>
