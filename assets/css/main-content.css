@@ -27,6 +27,70 @@
   animation: spinAnimation 1.4s linear infinite;
 }
 
+#cardsContainer .cart-product {
+  border: 2px solid #1c1c1c;
+  border-radius: 10px;
+}
+
+.cart-product .header-container {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+  padding: 0.3rem 0.3rem;
+}
+
+.product-header h2 {
+  margin: 0;
+}
+
+.product-header p {
+  margin: 0;
+}
+
+.cart-product img {
+  width: 30vw;
+  height: auto;
+  z-index: -2;
+  display: block;
+}
+
+.cart-product figcaption {
+  padding-left: 0.4rem;
+}
+
+.cart-product figcaption .btn-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.btn-container .add-subtract-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.add-subtract-container #subtract-btn,
+.add-subtract-container #add-btn,
+.remove-container #remove-btn {
+  border-radius: 100%;
+  border: 0;
+  padding: 0.5rem 0.7rem;
+  font-size: 16px;
+}
+
+.btn-container .remove-container {
+  display: flex;
+  align-items: center;
+}
+
+#remove-btn {
+  background: #ff0707;
+  display: flex;
+}
+
 #cardsContainer .product-card {
   display: flex;
   flex-direction: column;
