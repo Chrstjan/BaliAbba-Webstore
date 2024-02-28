@@ -11,6 +11,7 @@ hamburgerBtn.addEventListener("click", () => {
 });
 
 let allProducts = null;
+let productsInCart = [];
 
 buildLoadingAnimation();
 getCategoryData();
@@ -94,7 +95,17 @@ function navigationCallBack(clickedCategory) {
 }
 
 function cartCallback(clickedProduct) {
-  console.log(clickedProduct);
+  // console.log(clickedProduct);
+
+  allProducts.forEach((products) => {
+    if (products.id == clickedProduct) {
+      productsInCart.push(products);
+    }
+  });
+
+  // console.log(productsInCart);
+  let cartArray_seriallized = JSON.stringify(productsInCart);
+  localStorage.setItem("cartArray", cartArray_seriallized);
 }
 
 function removeLoadingAnimation() {
@@ -205,7 +216,8 @@ function buildProductDetails(productId) {
                         <p class="amount-text">1</p>
                         <button id="add-btn">+</button>
                     </div>
-                    <button onclick="cartCallback(${clickedProduct.id})>Add to cart</button>
+                    <button onclick="cartCallback(${clickedProduct.id})">Add to cart
+                    </button>
                 </span>
                 <h3>${clickedProduct.description}</h3>
                 <footer>
