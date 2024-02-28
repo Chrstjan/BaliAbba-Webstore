@@ -243,6 +243,35 @@ function buildProductDetails(productId) {
   }
 }
 
+function buildShoppingCart(shoppingCart) {
+  //console.log(shoppingCart);
+  cardsContainer.innerHTML = "";
+
+  shoppingCart.forEach((product) => {
+    let cartProduct = `
+      <figure>
+        <header>
+          <h2>${product.title}</h2>
+          <span><p>${product.brand}</p></span>
+        </header>
+        <img src="${product.thumbnail}" alt="${product.title}" />
+        <figcaption>
+          <div>
+            <button id="subtract-btn"></button>
+            <p>1</p>
+            <button id="add-btn"></button>
+          </div>
+          <span>
+            <h4>${product.price}</h4>
+          </span>
+        </figcaption>
+      </figure>
+    `;
+
+    cardsContainer.innerHTML += cartProduct;
+  });
+}
+
 //Temp navigation
 function buildSidebar(categoryData) {
   //Code is temp will be remade later
