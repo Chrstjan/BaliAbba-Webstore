@@ -12,7 +12,7 @@ hamburgerBtn.addEventListener("click", () => {
 
 let allProducts = null;
 
-buildLoadingAnimation(); 
+buildLoadingAnimation();
 getCategoryData();
 getProductData();
 //#endregion GLOBAL code
@@ -75,7 +75,6 @@ function recivedProductData(productData) {
   );
 
   buildProductCard(featuredProductsArray);
-
 }
 
 function navigationCallBack(clickedCategory) {
@@ -94,6 +93,10 @@ function navigationCallBack(clickedCategory) {
   }
 }
 
+function cartCallback(clickedProduct) {
+  console.log(clickedProduct);
+}
+
 function removeLoadingAnimation() {
   const loadingContainer = document.querySelector(".loading-container");
   if (loadingContainer) {
@@ -103,7 +106,7 @@ function removeLoadingAnimation() {
 //#endregion controller code
 
 //#region view code
-function buildLoadingAnimation(){
+function buildLoadingAnimation() {
   //This is only temp testing
   cardsContainer.innerHTML = "";
 
@@ -111,10 +114,10 @@ function buildLoadingAnimation(){
   <div class="loading-container">
     <div class="loading"></div>
     <h2>Loading...</h2>
-  </div>`
+  </div>`;
 
   cardsContainer.innerHTML = loadingAnimation;
-};
+}
 
 function buildProductCard(featuredProducts) {
   cardsContainer.innerHTML = "";
@@ -135,7 +138,12 @@ function buildProductCard(featuredProducts) {
                     </span>
                     <p>(${randRatingAmount} reviews)</p>
                 </span>
-                <span class="price"><h4>${product.price} £</h4><button>Add to cart</button></span>
+                <span class="price">
+                  <h4>${product.price} £</h4>
+                  <button onclick="cartCallback(${product.id})">
+                    Add to cart
+                  </button>
+                </span>
                 <h3>${product.description}</h3>
                 <footer>
                     <h5>${product.stock} in stock</h5>
@@ -197,7 +205,7 @@ function buildProductDetails(productId) {
                         <p class="amount-text">1</p>
                         <button id="add-btn">+</button>
                     </div>
-                    <button>Add to cart</button>
+                    <button onclick="cartCallback(${clickedProduct.id})>Add to cart</button>
                 </span>
                 <h3>${clickedProduct.description}</h3>
                 <footer>
@@ -213,7 +221,7 @@ function buildProductDetails(productId) {
 function buildSidebar(categoryData) {
   //Code is temp will be remade later
 
-  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`
+  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
   let subTopNavigation = `
     <span class="top-nav">
       <li class="sidebar-nav"><button>Home</button></li>
