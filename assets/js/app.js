@@ -176,6 +176,8 @@ function buildShoppingCart(shoppingCart) {
   //console.log(shoppingCart);
   cardsContainer.innerHTML = "";
 
+  let totalPrice = 0;
+
   shoppingCart.forEach((product) => {
     let cartProduct = `
       <figure>
@@ -185,20 +187,53 @@ function buildShoppingCart(shoppingCart) {
         </header>
         <img src="${product.thumbnail}" alt="${product.title}" />
         <figcaption>
-          <div>
-            <button id="subtract-btn"></button>
-            <p>1</p>
-            <button id="add-btn"></button>
-          </div>
           <span>
-            <h4>${product.price}</h4>
+            <div>
+              <button id="subtract-btn">-</button>
+              <p>1</p>
+              <button id="add-btn">+</button>
+            </div>
+            <div>
+              <button id="remove-btn">-</button>
+            </div>
+          </span>
+          <span>
+            <h4>${product.price} £</h4>
           </span>
         </figcaption>
       </figure>
     `;
-
     cardsContainer.innerHTML += cartProduct;
+
+    totalPrice += parseFloat(product.price);
   });
+
+  let cartPrice = `
+      <section>
+       <header>
+         <h4>Vat:</h4>
+          <span><p>${totalPrice} £</p></span>
+        </header>
+        <div>
+          <header><h3>Add giftcard or campaign code</h3></header>
+          <input type="text" placholder="Input Code *" />
+          <button type="submit">Add</button>
+        </div>
+        <footer>
+          <h3>Total:</h3>
+          <span>
+            <p>${totalPrice} £</p>
+          </span>
+        </footer>
+      </section>`;
+
+  cardsContainer.innerHTML += cartPrice;
+
+  let checkout = `
+    <footer>
+      <button>Checkout</button>
+    </footer>`;
+  cardsContainer.innerHTML += checkout;
 }
 
 function buildProductCard(featuredProducts) {
