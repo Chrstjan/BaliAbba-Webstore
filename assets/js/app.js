@@ -17,9 +17,13 @@ shoppingCartElement.addEventListener("click", () => {
 let allProducts = null;
 let productsInCart = [];
 
+//#region calling functions
 buildLoadingAnimation();
 getCategoryData();
 getProductData();
+
+//#endregion calling functions
+
 //#endregion GLOBAL code
 
 //#region model code
@@ -131,6 +135,7 @@ function removeLoadingAnimation() {
 //#endregion controller code
 
 //#region view code
+
 function buildLoadingAnimation() {
   //This is only temp testing
   cardsContainer.innerHTML = "";
@@ -142,6 +147,58 @@ function buildLoadingAnimation() {
   </div>`;
 
   cardsContainer.innerHTML = loadingAnimation;
+}
+
+//Temp navigation
+function buildSidebar(categoryData) {
+  //Code is temp will be remade later
+
+  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
+  let subTopNavigation = `
+    <span class="top-nav">
+      <li class="sidebar-nav"><button>Home</button></li>
+      <li class="sidebar-nav"><button>Categories</button></li>
+      <li class="sidebar-nav"><button>Login</button></li>
+    </span>`;
+  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All</button></li>`;
+  mainNav.innerHTML += topNavigation;
+  mainNav.innerHTML += subTopNavigation;
+  mainNav.innerHTML += navigation;
+
+  categoryData.forEach((category) => {
+    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category}')">${category}</button></li>`;
+
+    mainNav.innerHTML += navigation;
+  });
+}
+
+function buildShoppingCart(shoppingCart) {
+  //console.log(shoppingCart);
+  cardsContainer.innerHTML = "";
+
+  shoppingCart.forEach((product) => {
+    let cartProduct = `
+      <figure>
+        <header>
+          <h2>${product.title}</h2>
+          <span><p>${product.brand}</p></span>
+        </header>
+        <img src="${product.thumbnail}" alt="${product.title}" />
+        <figcaption>
+          <div>
+            <button id="subtract-btn"></button>
+            <p>1</p>
+            <button id="add-btn"></button>
+          </div>
+          <span>
+            <h4>${product.price}</h4>
+          </span>
+        </figcaption>
+      </figure>
+    `;
+
+    cardsContainer.innerHTML += cartProduct;
+  });
 }
 
 function buildProductCard(featuredProducts) {
@@ -241,58 +298,6 @@ function buildProductDetails(productId) {
         </figure>`;
     cardsContainer.innerHTML = detailedProductCard;
   }
-}
-
-function buildShoppingCart(shoppingCart) {
-  //console.log(shoppingCart);
-  cardsContainer.innerHTML = "";
-
-  shoppingCart.forEach((product) => {
-    let cartProduct = `
-      <figure>
-        <header>
-          <h2>${product.title}</h2>
-          <span><p>${product.brand}</p></span>
-        </header>
-        <img src="${product.thumbnail}" alt="${product.title}" />
-        <figcaption>
-          <div>
-            <button id="subtract-btn"></button>
-            <p>1</p>
-            <button id="add-btn"></button>
-          </div>
-          <span>
-            <h4>${product.price}</h4>
-          </span>
-        </figcaption>
-      </figure>
-    `;
-
-    cardsContainer.innerHTML += cartProduct;
-  });
-}
-
-//Temp navigation
-function buildSidebar(categoryData) {
-  //Code is temp will be remade later
-
-  let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
-  let subTopNavigation = `
-    <span class="top-nav">
-      <li class="sidebar-nav"><button>Home</button></li>
-      <li class="sidebar-nav"><button>Categories</button></li>
-      <li class="sidebar-nav"><button>Login</button></li>
-    </span>`;
-  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All</button></li>`;
-  mainNav.innerHTML += topNavigation;
-  mainNav.innerHTML += subTopNavigation;
-  mainNav.innerHTML += navigation;
-
-  categoryData.forEach((category) => {
-    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category}')">${category}</button></li>`;
-
-    mainNav.innerHTML += navigation;
-  });
 }
 
 //#endregion view code
