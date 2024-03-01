@@ -191,18 +191,19 @@ function recivedProductData(productData) {
 function navigationCallBack(clickedCategory) {
   if (clickedCategory == "all") {
     buildProductCard(allProducts);
+  } else {
+    let clickedSubCategoryArray = [];
+
+    navigationArray.forEach((subCategory) => {
+      if (subCategory.subCategory == clickedCategory) {
+        clickedSubCategoryArray.push(subCategory);
+      }
+    });
+
+    console.log(clickedSubCategoryArray);
+    // buildProductCard(clickedSubCategoryArray);
+    buildCategoryCard(clickedSubCategoryArray);
   }
-
-  let clickedSubCategoryArray = [];
-
-  navigationArray.forEach((subCategory) => {
-    if (subCategory.subCategory == clickedCategory) {
-      clickedSubCategoryArray.push(subCategory);
-    }
-  });
-  console.log(clickedSubCategoryArray);
-  // buildProductCard(clickedSubCategoryArray);
-  buildCategoryCard(clickedSubCategoryArray);
 }
 
 function cartCallback(clickedProduct) {
