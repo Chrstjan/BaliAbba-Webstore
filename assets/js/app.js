@@ -14,6 +14,7 @@ shoppingCartElement.addEventListener("click", () => {
   retrieveLocalStorage();
 });
 
+let navigationArray = [];
 let allProducts = null;
 let productsInCart = [];
 
@@ -68,7 +69,108 @@ function recivedCategoryData(categoryData) {
   // const categoryArray = categoryData.map(category => [category]);
   console.log(categoryData);
 
-  buildSidebar(categoryData);
+  let allCategories = categoryData;
+
+  let eletronicDevices = [];
+  let homeDecoration = [];
+  let clothes = [];
+  let accessories = [];
+  let skinCare = [];
+  let vehicles = [];
+  let grocery = [];
+  let misc = [];
+
+  allCategories.forEach((category) => {
+    switch (category) {
+      case "smartphones":
+      case "laptops": {
+        eletronicDevices.push(category);
+        break;
+      }
+
+      case "home-decoration":
+      case "furniture":
+      case "lighting": {
+        homeDecoration.push(category);
+        break;
+      }
+
+      case "tops":
+      case "womens-dresses":
+      case "womens-shoes":
+      case "mens-shirts":
+      case "mens-shoes": {
+        clothes.push(category);
+        break;
+      }
+
+      case "mens-watches":
+      case "womens-watches":
+      case "womens-bags":
+      case "womens-jewellery":
+      case "sunglasses": {
+        accessories.push(category);
+        break;
+      }
+
+      case "fragrances":
+      case "skincare": {
+        skinCare.push(category);
+        break;
+      }
+
+      case "automotive":
+      case "motorcycle": {
+        vehicles.push(category);
+        break;
+      }
+
+      case "groceries": {
+        grocery.push(category);
+        break;
+      }
+
+      default: {
+        misc.push(category);
+        break;
+      }
+    }
+  });
+  // console.log(eletronicDevices);
+
+  navigationArray = [
+    {
+      supCategory: "Eletronic Devices",
+      subCategory: eletronicDevices,
+    },
+    {
+      supCategory: "Home Decoration",
+      subCategory: homeDecoration,
+    },
+    {
+      supCategory: "Clothes",
+      subCategory: clothes,
+    },
+    {
+      supCategory: "Accesories",
+      subCategory: accessories,
+    },
+    {
+      supCategory: "Skin Care",
+      subCategory: skinCare,
+    },
+    {
+      supCategory: "Vehicles",
+      subCategory: vehicles,
+    },
+    {
+      supCategory: "Grocery",
+      subCategory: grocery,
+    },
+  ];
+
+  // buildSidebar(categoryData);
+  buildSidebar(navigationArray);
 }
 
 function recivedProductData(productData) {
