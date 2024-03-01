@@ -127,6 +127,8 @@ function cartCallback(clickedProduct) {
   // console.log(productsInCart);
 }
 
+console.log("test");
+
 function retrieveLocalStorage() {
   let shoppingCart = localStorage.getItem("cartArray");
 
