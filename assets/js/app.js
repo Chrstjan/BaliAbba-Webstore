@@ -258,6 +258,17 @@ function categoryCallback(clickedSubCategory) {
   buildProductCard(clickedProductCategory);
 }
 
+//Testing. Not working code!!
+function breadcrumbCallback(breadcrumb) {
+  console.log(breadcrumb);
+  switch (breadcrumb) {
+    case "smartphones": {
+      console.log("lol");
+      break;
+    }
+  }
+}
+
 function retrieveLocalStorage() {
   let shoppingCart = localStorage.getItem("cartArray");
 
@@ -455,6 +466,8 @@ function buildProductDetails(productId) {
   }
 
   function buildCard(clickedProduct) {
+    let backBtn = `<button onclick="breadcrumbCallback('${clickedProduct.category}')" class="back-btn">&larr;</button>`;
+
     const randRatingAmount = Math.floor(Math.random() * 3500 + 1);
     let smallProductImages = clickedProduct.images;
 
@@ -494,7 +507,8 @@ function buildProductDetails(productId) {
                 </footer>
             </figcaption>
         </figure>`;
-    cardsContainer.innerHTML = detailedProductCard;
+    cardsContainer.innerHTML += backBtn;
+    cardsContainer.innerHTML += detailedProductCard;
   }
 }
 
