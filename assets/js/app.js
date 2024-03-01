@@ -367,11 +367,17 @@ function buildCategoryCard(subCategories) {
 
   subCategories.forEach((supCategory) => {
     let CategoryContainer = document.createElement("div");
-    CategoryContainer.innerHTML = `<h2>${supCategory.supCategory}</h2>`;
+    CategoryContainer.classList.add("category-container");
+    CategoryContainer.innerHTML = `<header><h2>${supCategory.supCategory}</h2></header>`;
     cardsContainer.appendChild(CategoryContainer);
 
     supCategory.subCategory.forEach((subCategory) => {
-      let categoryCard = `<div><button onclick="categoryCallback('${subCategory}')">${subCategory}</button></div>`;
+      let categoryCard = `
+        <div class="sub-category">
+          <button class="sub-category-name" onclick="categoryCallback('${subCategory}')">
+            ${subCategory}
+          </button>
+        </div>`;
       CategoryContainer.innerHTML += categoryCard;
     });
   });
