@@ -231,6 +231,22 @@ function cartCallback(clickedProduct) {
   // console.log(productsInCart);
 }
 
+function removeFromCart(clickedProduct) {
+  let shoppingCart = localStorage.getItem("cartArray");
+  let shoppingCartArray = JSON.parse(shoppingCart || "[]");
+
+  const productToRemove = shoppingCartArray.findIndex(
+    (product) => product.id == clickedProduct
+  );
+
+  if (productToRemove !== -1) {
+    shoppingCartArray.splice(productToRemove, 1);
+
+    localStorage.setItem("cartArray", JSON.stringify(shoppingCartArray));
+    retrieveLocalStorage();
+  }
+}
+
 function categoryCallback(clickedSubCategory) {
   let clickedProductCategory = [];
   allProducts.forEach((product) => {
@@ -322,7 +338,7 @@ function buildShoppingCart(shoppingCart) {
               <h4>${product.price} £</h4>
             </span>
             <div class="remove-container">
-              <button id="remove-btn">-</button>
+              <button id="remove-btn" onclick="removeFromCart('${product.id}')">-</button>
             </div>
           </span>
         </figcaption>
