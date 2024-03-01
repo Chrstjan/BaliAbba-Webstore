@@ -105,15 +105,26 @@ function navigationCallBack(clickedCategory) {
 function cartCallback(clickedProduct) {
   // console.log(clickedProduct);
 
-  allProducts.forEach((products) => {
-    if (products.id == clickedProduct) {
-      productsInCart.push(products);
-    }
-  });
+  let shoppingCart = localStorage.getItem("cartArray");
+  let shoppingCartArray = JSON.parse(shoppingCart || "[]");
+
+  let productToAdd = allProducts.find(
+    (product) => product.id == clickedProduct
+  );
+
+  if (productToAdd) {
+    shoppingCartArray.push(productToAdd);
+    let cartArray_seriallized = JSON.stringify(shoppingCartArray);
+    localStorage.setItem("cartArray", cartArray_seriallized);
+  }
+
+  // allProducts.forEach((products) => {
+  //   if (products.id == clickedProduct) {
+  //     productsInCart.push(products);
+  //   }
+  // });
 
   // console.log(productsInCart);
-  let cartArray_seriallized = JSON.stringify(productsInCart);
-  localStorage.setItem("cartArray", cartArray_seriallized);
 }
 
 function retrieveLocalStorage() {
