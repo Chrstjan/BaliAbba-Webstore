@@ -14,6 +14,7 @@ shoppingCartElement.addEventListener("click", () => {
   retrieveLocalStorage();
 });
 
+let navigationArray = [];
 let allProducts = null;
 let productsInCart = [];
 
@@ -68,7 +69,108 @@ function recivedCategoryData(categoryData) {
   // const categoryArray = categoryData.map(category => [category]);
   console.log(categoryData);
 
-  buildSidebar(categoryData);
+  let allCategories = categoryData;
+
+  let eletronicDevices = [];
+  let homeDecoration = [];
+  let clothes = [];
+  let accessories = [];
+  let skinCare = [];
+  let vehicles = [];
+  let grocery = [];
+  let misc = [];
+
+  allCategories.forEach((category) => {
+    switch (category) {
+      case "smartphones":
+      case "laptops": {
+        eletronicDevices.push(category);
+        break;
+      }
+
+      case "home-decoration":
+      case "furniture":
+      case "lighting": {
+        homeDecoration.push(category);
+        break;
+      }
+
+      case "tops":
+      case "womens-dresses":
+      case "womens-shoes":
+      case "mens-shirts":
+      case "mens-shoes": {
+        clothes.push(category);
+        break;
+      }
+
+      case "mens-watches":
+      case "womens-watches":
+      case "womens-bags":
+      case "womens-jewellery":
+      case "sunglasses": {
+        accessories.push(category);
+        break;
+      }
+
+      case "fragrances":
+      case "skincare": {
+        skinCare.push(category);
+        break;
+      }
+
+      case "automotive":
+      case "motorcycle": {
+        vehicles.push(category);
+        break;
+      }
+
+      case "groceries": {
+        grocery.push(category);
+        break;
+      }
+
+      default: {
+        misc.push(category);
+        break;
+      }
+    }
+  });
+  // console.log(eletronicDevices);
+
+  navigationArray = [
+    {
+      supCategory: "Eletronic Devices",
+      subCategory: eletronicDevices,
+    },
+    {
+      supCategory: "Home Decoration",
+      subCategory: homeDecoration,
+    },
+    {
+      supCategory: "Clothes",
+      subCategory: clothes,
+    },
+    {
+      supCategory: "Accesories",
+      subCategory: accessories,
+    },
+    {
+      supCategory: "Skin Care",
+      subCategory: skinCare,
+    },
+    {
+      supCategory: "Vehicles",
+      subCategory: vehicles,
+    },
+    {
+      supCategory: "Grocery",
+      subCategory: grocery,
+    },
+  ];
+
+  // buildSidebar(categoryData);
+  buildSidebar(navigationArray);
 }
 
 function recivedProductData(productData) {
@@ -92,13 +194,15 @@ function navigationCallBack(clickedCategory) {
   } else {
     let clickedSubCategoryArray = [];
 
-    allProducts.forEach((product) => {
-      if (product.category == clickedCategory) {
-        clickedSubCategoryArray.push(product);
+    navigationArray.forEach((subCategory) => {
+      if (subCategory.subCategory == clickedCategory) {
+        clickedSubCategoryArray.push(subCategory);
       }
     });
 
-    buildProductCard(clickedSubCategoryArray);
+    console.log(clickedSubCategoryArray);
+    // buildProductCard(clickedSubCategoryArray);
+    buildCategoryCard(clickedSubCategoryArray);
   }
 }
 
@@ -125,6 +229,17 @@ function cartCallback(clickedProduct) {
   // });
 
   // console.log(productsInCart);
+}
+
+function categoryCallback(clickedSubCategory) {
+  let clickedProductCategory = [];
+  allProducts.forEach((product) => {
+    if (product.category == clickedSubCategory) {
+      clickedProductCategory.push(product);
+    }
+  });
+  // console.log(clickedProductCategory);
+  buildProductCard(clickedProductCategory);
 }
 
 function retrieveLocalStorage() {
@@ -160,10 +275,7 @@ function buildLoadingAnimation() {
   cardsContainer.innerHTML = loadingAnimation;
 }
 
-//Temp navigation
 function buildSidebar(categoryData) {
-  //Code is temp will be remade later
-
   let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
   let subTopNavigation = `
     <span class="top-nav">
@@ -171,13 +283,13 @@ function buildSidebar(categoryData) {
       <li class="sidebar-nav"><button>Categories</button></li>
       <li class="sidebar-nav"><button>Login</button></li>
     </span>`;
-  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All</button></li>`;
+  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All Products</button></li>`;
   mainNav.innerHTML += topNavigation;
   mainNav.innerHTML += subTopNavigation;
   mainNav.innerHTML += navigation;
 
   categoryData.forEach((category) => {
-    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category}')">${category}</button></li>`;
+    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category.subCategory}')">${category.supCategory}</button></li>`;
 
     mainNav.innerHTML += navigation;
   });
@@ -247,6 +359,28 @@ function buildShoppingCart(shoppingCart) {
       <button>Checkout</button>
     </footer>`;
   cardsContainer.innerHTML += checkout;
+}
+
+function buildCategoryCard(subCategories) {
+  cardsContainer.innerHTML = "";
+  // console.log(subCategories);
+
+  subCategories.forEach((supCategory) => {
+    let CategoryContainer = document.createElement("div");
+    CategoryContainer.classList.add("category-container");
+    CategoryContainer.innerHTML = `<header><h2>${supCategory.supCategory}</h2></header>`;
+    cardsContainer.appendChild(CategoryContainer);
+
+    supCategory.subCategory.forEach((subCategory) => {
+      let categoryCard = `
+        <div class="sub-category">
+          <button class="sub-category-name" onclick="categoryCallback('${subCategory}')">
+            ${subCategory}
+          </button>
+        </div>`;
+      CategoryContainer.innerHTML += categoryCard;
+    });
+  });
 }
 
 function buildProductCard(featuredProducts) {
