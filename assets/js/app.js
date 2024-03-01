@@ -230,6 +230,17 @@ function cartCallback(clickedProduct) {
   // console.log(productsInCart);
 }
 
+function categoryCallback(clickedSubCategory) {
+  let clickedProductCategory = [];
+  allProducts.forEach((product) => {
+    if (product.category == clickedSubCategory) {
+      clickedProductCategory.push(product);
+    }
+  });
+  // console.log(clickedProductCategory);
+  buildProductCard(clickedProductCategory);
+}
+
 function retrieveLocalStorage() {
   let shoppingCart = localStorage.getItem("cartArray");
 
