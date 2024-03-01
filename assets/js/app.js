@@ -191,17 +191,18 @@ function recivedProductData(productData) {
 function navigationCallBack(clickedCategory) {
   if (clickedCategory == "all") {
     buildProductCard(allProducts);
-  } else {
-    let clickedSubCategoryArray = [];
-
-    allProducts.forEach((product) => {
-      if (product.category == clickedCategory) {
-        clickedSubCategoryArray.push(product);
-      }
-    });
-
-    buildProductCard(clickedSubCategoryArray);
   }
+
+  let clickedSubCategoryArray = [];
+
+  navigationArray.forEach((subCategory) => {
+    if (subCategory.subCategory == clickedCategory) {
+      clickedSubCategoryArray.push(subCategory);
+    }
+  });
+  console.log(clickedSubCategoryArray);
+  // buildProductCard(clickedSubCategoryArray);
+  buildCategoryCard(clickedSubCategoryArray);
 }
 
 function cartCallback(clickedProduct) {
@@ -262,10 +263,7 @@ function buildLoadingAnimation() {
   cardsContainer.innerHTML = loadingAnimation;
 }
 
-//Temp navigation
 function buildSidebar(categoryData) {
-  //Code is temp will be remade later
-
   let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
   let subTopNavigation = `
     <span class="top-nav">
@@ -273,13 +271,13 @@ function buildSidebar(categoryData) {
       <li class="sidebar-nav"><button>Categories</button></li>
       <li class="sidebar-nav"><button>Login</button></li>
     </span>`;
-  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All</button></li>`;
+  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All Products</button></li>`;
   mainNav.innerHTML += topNavigation;
   mainNav.innerHTML += subTopNavigation;
   mainNav.innerHTML += navigation;
 
   categoryData.forEach((category) => {
-    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category}')">${category}</button></li>`;
+    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category.subCategory}')">${category.supCategory}</button></li>`;
 
     mainNav.innerHTML += navigation;
   });
