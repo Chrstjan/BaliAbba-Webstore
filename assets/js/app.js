@@ -349,6 +349,22 @@ function buildShoppingCart(shoppingCart) {
   cardsContainer.innerHTML += checkout;
 }
 
+function buildCategoryCard(subCategories) {
+  cardsContainer.innerHTML = "";
+  // console.log(subCategories);
+
+  subCategories.forEach((supCategory) => {
+    let CategoryContainer = document.createElement("div");
+    CategoryContainer.innerHTML = `<h2>${supCategory.supCategory}</h2>`;
+    cardsContainer.appendChild(CategoryContainer);
+
+    supCategory.subCategory.forEach((subCategory) => {
+      let categoryCard = `<div><button onclick="categoryCallback('${subCategory}')">${subCategory}</button></div>`;
+      CategoryContainer.innerHTML += categoryCard;
+    });
+  });
+}
+
 function buildProductCard(featuredProducts) {
   cardsContainer.innerHTML = "";
   console.log(featuredProducts);
