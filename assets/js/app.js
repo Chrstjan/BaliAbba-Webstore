@@ -258,15 +258,28 @@ function categoryCallback(clickedSubCategory) {
   buildProductCard(clickedProductCategory);
 }
 
-//Testing. Not working code!!
 function breadcrumbCallback(breadcrumb) {
-  console.log(breadcrumb);
-  switch (breadcrumb) {
-    case "smartphones": {
-      console.log("lol");
-      break;
+  let breadcrumbArray = [];
+  allProducts.forEach((product) => {
+    if (product.category == breadcrumb) {
+      switch (breadcrumb) {
+        case "smartphones": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
+
+        case "laptops": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
+
+        //case...
+      }
     }
-  }
+  });
+  console.log(breadcrumbArray);
 }
 
 function retrieveLocalStorage() {
