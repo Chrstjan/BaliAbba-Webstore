@@ -259,7 +259,10 @@ function categoryCallback(clickedSubCategory) {
 }
 
 function breadcrumbCallback(breadcrumb) {
-  let breadcrumbArray = [];
+  const filteredProducts = allProducts.filter(product => product.category === breadcrumb);
+  buildProductCard(filteredProducts);
+  //#region old hardcoded code
+  /*let breadcrumbArray = [];
   allProducts.forEach((product) => {
     if (product.category == breadcrumb) {
       switch (breadcrumb) {
@@ -275,11 +278,22 @@ function breadcrumbCallback(breadcrumb) {
           break;
         }
 
-        //case...
+        case "fragrances": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
+
+        case "skincare": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
       }
     }
   });
-  console.log(breadcrumbArray);
+  console.log(breadcrumbArray); */
+  //#endregion old code
 }
 
 function retrieveLocalStorage() {
