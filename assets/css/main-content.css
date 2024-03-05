@@ -91,6 +91,55 @@
   display: flex;
 }
 
+#cardsContainer .shopping-cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-price-container .total-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid #1c1c1c;
+}
+
+.total-price-container .discount-container {
+  border-bottom: 1px solid #1c1c1c;
+  padding-bottom: 0.5rem;
+}
+
+.discount-container input {
+  border: 0;
+}
+
+.discount-container button {
+  border: 0;
+  background: transparent;
+  font-size: 15px;
+}
+
+.total-price-container .total-price-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.checkout-container button {
+  right: 0;
+  top: 0;
+  margin-bottom: 0.5rem;
+  border: 0;
+  background: #010101;
+  color: #fff;
+  border-radius: 30px;
+  padding: 0.5rem 0.7rem;
+}
+
 #cardsContainer .category-container {
   display: flex;
   justify-content: center;

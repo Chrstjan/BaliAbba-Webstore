@@ -235,6 +235,11 @@ function updateShoppingCart(productToAdd) {
   setLocalStorage("cartArray", shoppingCartArray);
 }
 
+function showShoppingCart() {
+  let shoppingCartArray = getLocalStorage("cartArray");
+  buildShoppingCart(shoppingCartArray);
+}
+
 function removeFromCart(clickedProduct) {
   let shoppingCartArray = getLocalStorage("cartArray");
 
@@ -300,11 +305,6 @@ function breadcrumbCallback(breadcrumb) {
   //#endregion old code
 }
 
-function showShoppingCart() {
-  let shoppingCartArray = getLocalStorage("cartArray");
-  buildShoppingCart(shoppingCartArray);
-}
-
 function removeLoadingAnimation() {
   const loadingContainer = document.querySelector(".loading-container");
   if (loadingContainer) {
@@ -352,6 +352,9 @@ function buildShoppingCart(shoppingCart) {
   //console.log(shoppingCart);
   cardsContainer.innerHTML = "";
 
+  let shoppingCartContainer = document.createElement("div");
+  shoppingCartContainer.classList.add("shopping-cart-container");
+
   let totalPrice = 0;
 
   shoppingCart.forEach((product) => {
@@ -381,23 +384,23 @@ function buildShoppingCart(shoppingCart) {
         </figcaption>
       </figure>
     `;
-    cardsContainer.innerHTML += cartProduct;
+    shoppingCartContainer.innerHTML += cartProduct;
 
     totalPrice += parseFloat(product.price);
   });
 
   let cartPrice = `
-      <section>
-       <header>
+      <section class="total-price-container">
+       <header class="total-price">
          <h4>Vat:</h4>
-          <span><p>${totalPrice} £</p></span>
+         <span><p>${totalPrice} £</p></span>
         </header>
-        <div>
+        <div class="discount-container">
           <header><h3>Add giftcard or campaign code</h3></header>
-          <input type="text" placholder="Input Code *" />
-          <button type="submit">Add</button>
+          <input type="text" placeholder="Input Code *" />
+          <button type="submit" class="submit-btn">Add</button>
         </div>
-        <footer>
+        <footer class="total-price-footer">
           <h3>Total:</h3>
           <span>
             <p>${totalPrice} £</p>
@@ -405,13 +408,14 @@ function buildShoppingCart(shoppingCart) {
         </footer>
       </section>`;
 
-  cardsContainer.innerHTML += cartPrice;
+  shoppingCartContainer.innerHTML += cartPrice;
 
   let checkout = `
-    <footer>
+    <footer class="checkout-container">
       <button>Checkout</button>
     </footer>`;
-  cardsContainer.innerHTML += checkout;
+  shoppingCartContainer.innerHTML += checkout;
+  cardsContainer.appendChild(shoppingCartContainer);
 }
 
 function buildCategoryCard(subCategories) {
