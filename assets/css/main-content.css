@@ -30,6 +30,7 @@
 #cardsContainer .cart-product {
   border: 2px solid #1c1c1c;
   border-radius: 10px;
+  position: relative;
 }
 
 .cart-product .header-container {
@@ -82,13 +83,13 @@
 }
 
 .btn-container .remove-container {
-  display: flex;
-  align-items: center;
+  position: absolute;
+  left: -13%; /* right: 1% */
+  top: 27%;
 }
 
 #remove-btn {
   background: #ff0707;
-  display: flex;
 }
 
 #cardsContainer .shopping-cart-container {
@@ -96,6 +97,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .total-price-container .total-price {

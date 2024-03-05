@@ -19,6 +19,7 @@
   height: 100%;
   padding-top: 8rem;
   overflow-y: scroll;
+  z-index: 99;
 }
 
 #main-list.show-nav {
@@ -54,7 +55,6 @@ body.no-scroll {
 #main-list .sidebar-nav {
   list-style-type: none;
 }
-
 
 #main-list .sidebar-category {
   list-style-type: none;
