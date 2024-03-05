@@ -11,7 +11,7 @@ hamburgerBtn.addEventListener("click", () => {
 });
 
 shoppingCartElement.addEventListener("click", () => {
-  retrieveLocalStorage();
+  showShoppingCart();
 });
 
 let navigationArray = [];
@@ -60,6 +60,16 @@ function getProductData() {
     .catch((error) => {
       console.log("Error fetching product data:", error);
     });
+}
+
+function getLocalStorage(key) {
+  let localData = localStorage.getItem(key);
+  return JSON.parse(localData || "[]");
+}
+
+function setLocalStorage(key, value) {
+  let serializedValue = JSON.stringify(value);
+  localStorage.setItem(key, serializedValue);
 }
 
 //#endregion model code
@@ -209,31 +219,24 @@ function navigationCallBack(clickedCategory) {
 function cartCallback(clickedProduct) {
   // console.log(clickedProduct);
 
-  let shoppingCart = localStorage.getItem("cartArray");
-  let shoppingCartArray = JSON.parse(shoppingCart || "[]");
-
   let productToAdd = allProducts.find(
     (product) => product.id == clickedProduct
   );
 
   if (productToAdd) {
-    shoppingCartArray.push(productToAdd);
-    let cartArray_seriallized = JSON.stringify(shoppingCartArray);
-    localStorage.setItem("cartArray", cartArray_seriallized);
+    updateShoppingCart(productToAdd);
   }
+}
 
-  // allProducts.forEach((products) => {
-  //   if (products.id == clickedProduct) {
-  //     productsInCart.push(products);
-  //   }
-  // });
+function updateShoppingCart(productToAdd) {
+  let shoppingCartArray = getLocalStorage("cartArray");
 
-  // console.log(productsInCart);
+  shoppingCartArray.push(productToAdd);
+  setLocalStorage("cartArray", shoppingCartArray);
 }
 
 function removeFromCart(clickedProduct) {
-  let shoppingCart = localStorage.getItem("cartArray");
-  let shoppingCartArray = JSON.parse(shoppingCart || "[]");
+  let shoppingCartArray = getLocalStorage("cartArray");
 
   const productToRemove = shoppingCartArray.findIndex(
     (product) => product.id == clickedProduct
@@ -241,9 +244,8 @@ function removeFromCart(clickedProduct) {
 
   if (productToRemove !== -1) {
     shoppingCartArray.splice(productToRemove, 1);
-
-    localStorage.setItem("cartArray", JSON.stringify(shoppingCartArray));
-    retrieveLocalStorage();
+    setLocalStorage("cartArray", shoppingCartArray);
+    buildShoppingCart(shoppingCartArray);
   }
 }
 
@@ -259,7 +261,9 @@ function categoryCallback(clickedSubCategory) {
 }
 
 function breadcrumbCallback(breadcrumb) {
-  const filteredProducts = allProducts.filter(product => product.category === breadcrumb);
+  const filteredProducts = allProducts.filter(
+    (product) => product.category === breadcrumb
+  );
   buildProductCard(filteredProducts);
   //#region old hardcoded code
   /*let breadcrumbArray = [];
@@ -296,13 +300,8 @@ function breadcrumbCallback(breadcrumb) {
   //#endregion old code
 }
 
-function retrieveLocalStorage() {
-  let shoppingCart = localStorage.getItem("cartArray");
-
-  let shoppingCartArray = JSON.parse(shoppingCart);
-
-  // console.log(shoppingCartArray);
-
+function showShoppingCart() {
+  let shoppingCartArray = getLocalStorage("cartArray");
   buildShoppingCart(shoppingCartArray);
 }
 
