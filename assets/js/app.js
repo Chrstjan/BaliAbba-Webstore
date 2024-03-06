@@ -214,6 +214,8 @@ function recivedProductData(productData) {
 function navigationCallBack(clickedCategory) {
   if (clickedCategory == "all") {
     buildProductCard(allProducts);
+  } else if (clickedCategory == "allCategories") {
+    buildCategoryCard(navigationArray);
   } else {
     let clickedSubCategoryArray = [];
 
@@ -357,11 +359,14 @@ function buildSidebar(categoryData) {
   let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
   let subTopNavigation = `
     <span class="top-nav">
-      <li class="sidebar-nav"><button>Home</button></li>
-      <li class="sidebar-nav"><button>Categories</button></li>
+      <li class="sidebar-nav"><button onclick="buildProductCard(featuredProductsArray)">Home</button></li>
+      <li class="sidebar-nav"><button onclick="navigationCallBack('allCategories')">Categories</button></li>
       <li class="sidebar-nav"><button>Login</button></li>
     </span>`;
-  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All Products</button></li>`;
+  let navigation = `
+    <li class="sidebar-category">
+      <button onclick="navigationCallBack('all')">All Products</button>
+    </li>`;
   mainNav.innerHTML += topNavigation;
   mainNav.innerHTML += subTopNavigation;
   mainNav.innerHTML += navigation;
