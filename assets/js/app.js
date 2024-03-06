@@ -22,6 +22,7 @@ let productsInCart = [];
 buildLoadingAnimation();
 getCategoryData();
 getProductData();
+checkShoppingCart();
 
 //#endregion calling functions
 
@@ -228,15 +229,25 @@ function cartCallback(clickedProduct) {
   }
 }
 
+function checkShoppingCart() {
+  const cartArray = getLocalStorage("cartArray");
+  if (!cartArray || cartArray.length === 0) {
+    displayEmptyCartMessage();
+  }
+}
+
 function updateShoppingCart(productToAdd) {
   let shoppingCartArray = getLocalStorage("cartArray");
 
   shoppingCartArray.push(productToAdd);
   setLocalStorage("cartArray", shoppingCartArray);
+
+  checkShoppingCart();
 }
 
 function showShoppingCart() {
   let shoppingCartArray = getLocalStorage("cartArray");
+  checkShoppingCart();
   buildShoppingCart(shoppingCartArray);
 }
 
@@ -251,6 +262,8 @@ function removeFromCart(clickedProduct) {
     shoppingCartArray.splice(productToRemove, 1);
     setLocalStorage("cartArray", shoppingCartArray);
     buildShoppingCart(shoppingCartArray);
+
+    checkShoppingCart();
   }
 }
 
@@ -348,9 +361,22 @@ function buildSidebar(categoryData) {
   });
 }
 
+function displayEmptyCartMessage() {
+  cardsContainer.innerHTML = "";
+  let emptyMessage = `
+    <article>
+      <header><h3>Whoops your cart is empty!</h3></header>
+      <p>Check out some of our featured products</p>
+    </article>`;
+
+  cardsContainer.innerHTML += emptyMessage;
+}
+
 function buildShoppingCart(shoppingCart) {
   //console.log(shoppingCart);
   cardsContainer.innerHTML = "";
+
+  checkShoppingCart();
 
   let shoppingCartContainer = document.createElement("div");
   shoppingCartContainer.classList.add("shopping-cart-container");
