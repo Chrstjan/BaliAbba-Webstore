@@ -1,9 +1,15 @@
 //#region GLOBAL code
 const cardsContainer = document.getElementById("cardsContainer");
+const companyName = document.getElementById("company-name");
 const hamburgerBtn = document.getElementById("hamburger");
 const mainNav = document.getElementById("main-list");
 const shoppingCartElement = document.getElementById("basket-img");
 const domBody = document.body;
+
+//#region click eventListeners
+companyName.addEventListener("click", () => {
+  buildProductCard(featuredProductsArray);
+});
 
 hamburgerBtn.addEventListener("click", () => {
   mainNav.classList.toggle("show-nav");
@@ -13,23 +19,30 @@ hamburgerBtn.addEventListener("click", () => {
 shoppingCartElement.addEventListener("click", () => {
   showShoppingCart();
 });
+//#endregion click eventListeners//
 
+//#region arrays
 let navigationArray = [];
 let allProducts = null;
+let featuredProductsArray = [];
 let productsInCart = [];
+//#endregion arrays
 
 //#region calling functions
-buildLoadingAnimation();
-getCategoryData();
-getProductData();
-checkShoppingCart();
+Init();
+
+function Init() {
+  buildLoadingAnimation();
+  getCategoryData();
+  getProductData();
+  checkShoppingCart();
+}
 
 //#endregion calling functions
 
 //#endregion GLOBAL code
 
 //#region model code
-
 function getCategoryData() {
   fetch("https://dummyjson.com/products/categories?limit=0")
     .then((response) => {
@@ -189,7 +202,6 @@ function recivedProductData(productData) {
   console.log(allProducts);
 
   //Random featured products
-  const featuredProductsArray = [];
   featuredProductsArray.push(
     allProducts[2],
     allProducts[Math.floor(Math.random() * allProducts.length)],
@@ -363,12 +375,17 @@ function buildSidebar(categoryData) {
 
 function displayEmptyCartMessage() {
   cardsContainer.innerHTML = "";
-  let emptyMessage = `
-    <article>
-      <header><h3>Whoops your cart is empty!</h3></header>
-      <p>Check out some of our featured products</p>
-    </article>`;
 
+  let emptyMessage = `
+    <article class="empty-cart-container">
+      <header>
+        <h3>Whoops your cart is empty!</h3>
+      </header>
+      <p>Check out some of our featured products</p>
+      <div class="product-container">
+        <button onclick="buildProductCard(featuredProductsArray)">See Products</button>
+      </div>
+    </article>`;
   cardsContainer.innerHTML += emptyMessage;
 }
 

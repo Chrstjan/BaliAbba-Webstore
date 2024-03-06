@@ -44,6 +44,25 @@
 /*#endregion animation  */
 
 /*#region shoppingCart product  */
+
+/*#region empty cart  */
+#cardsContainer .empty-cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+
+.empty-cart-container .product-container button {
+  border: 0;
+  background: #010101;
+  color: #fff;
+  border-radius: 30px;
+  padding: 0.5rem 0.7rem;
+}
+/*#endregion empty cart  */
+
 #cardsContainer .cart-product {
   border: 2px solid #1c1c1c;
   border-radius: 10px;
