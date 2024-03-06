@@ -1,3 +1,4 @@
+/*#region animation  */
 @keyframes sidebarSlideIn {
   0% {
     left: 0%;
@@ -7,7 +8,9 @@
     left: 50%;
   }
 }
+/*#endregion animation  */
 
+/*#region sidebar  */
 #main-list {
   display: none;
   position: fixed;
@@ -68,6 +71,9 @@ body.no-scroll {
   font-size: 27px;
 }
 
+/*#endregion sidebar  */
+
+/*#region navbar  */
 .main-header {
   background: #1c1c1c;
   display: flex;
@@ -110,3 +116,4 @@ body.no-scroll {
   background: #fff;
   border-radius: 5px;
 }
+/*#endregion navbar  */

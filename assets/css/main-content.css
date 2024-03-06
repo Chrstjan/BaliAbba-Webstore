@@ -5,6 +5,20 @@
   align-items: center;
 }
 
+#cardsContainer .back-btn {
+  position: absolute;
+  left: 1%;
+  top: 15%;
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+  background: #1c1c1c;
+  border-radius: 50px;
+  color: #eee;
+  padding: 0.02rem 0.2rem;
+}
+
+/*#region animation  */
 @keyframes spinAnimation {
   0% {
     transform: rotate(0deg);
@@ -27,6 +41,9 @@
   animation: spinAnimation 1.4s linear infinite;
 }
 
+/*#endregion animation  */
+
+/*#region shoppingCart product  */
 #cardsContainer .cart-product {
   border: 2px solid #1c1c1c;
   border-radius: 10px;
@@ -59,6 +76,32 @@
   padding-left: 0.4rem;
 }
 
+.cart-product figcaption .description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.description-container h5 {
+  margin: 0;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-container .star-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .cart-product figcaption .btn-container {
   display: flex;
   flex-direction: row;
@@ -85,7 +128,7 @@
 .btn-container .remove-container {
   position: absolute;
   left: -13%; /* right: 1% */
-  top: 27%;
+  top: 45%;
 }
 
 #remove-btn {
@@ -142,6 +185,9 @@
   padding: 0.5rem 0.7rem;
 }
 
+/*#endregion shoppingCart product  */
+
+/*#region category  */
 #cardsContainer .category-container {
   display: flex;
   justify-content: center;
@@ -178,19 +224,9 @@
   text-transform: capitalize;
 }
 
-#cardsContainer .back-btn {
-  position: absolute;
-  left: 1%;
-  top: 15%;
-  border: 0;
-  background: transparent;
-  font-size: 24px;
-  background: #1c1c1c;
-  border-radius: 50px;
-  color: #eee;
-  padding: 0.02rem 0.2rem;
-}
+/*#endregion category  */
 
+/*#region productCard  */
 #cardsContainer .product-card {
   display: flex;
   flex-direction: column;
@@ -292,3 +328,4 @@
   text-align: end;
   font-size: 19px;
 }
+/*#endregion productCard  */

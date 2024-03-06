@@ -356,6 +356,7 @@ function buildShoppingCart(shoppingCart) {
   shoppingCartContainer.classList.add("shopping-cart-container");
 
   let totalPrice = 0;
+  const randRatingAmount = Math.floor(Math.random() * 3500 + 1);
 
   shoppingCart.forEach((product) => {
     let cartProduct = `
@@ -368,6 +369,16 @@ function buildShoppingCart(shoppingCart) {
           <img src="${product.thumbnail}" alt="${product.title}" />
         </div>
         <figcaption>
+          <span class="description-container">
+            <h5>${product.description}</h5>
+            <span class="rating-container">
+                    <span class="star-amount">
+                        <p>${product.rating}</p>
+                        <p class="star">&starf;</p>
+                    </span>
+                    <p>(${randRatingAmount} reviews)</p>
+                </span>
+          </span>
           <span class="btn-container">
             <div class="add-subtract-container">
               <button id="subtract-btn">-</button>
