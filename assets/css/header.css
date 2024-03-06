@@ -85,6 +85,7 @@ body.no-scroll {
 
 .main-header h1 {
   padding-left: 0.6rem;
+  z-index: 999;
 }
 
 .main-header .main-nav {
@@ -96,9 +97,27 @@ body.no-scroll {
   padding-right: 1rem;
 }
 
+.main-nav figure {
+  position: absolute;
+  top: 0.7%;
+  right: 0%;
+  z-index: 999;
+}
+
+.main-nav figure #cartAmount {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #eee;
+  color: #000;
+  border-radius: 100%;
+  padding: 0rem 0.4rem;
+  /* display: none; */
+}
+
 .main-nav #basket-img {
   filter: invert(100%);
-  padding-right: 0.6rem;
+  /* padding-right: 0.6rem; */
   width: 10vw;
   z-index: 999;
 }
@@ -106,6 +125,9 @@ body.no-scroll {
 .main-nav #hamburger {
   display: block;
   z-index: 999;
+  position: absolute;
+  top: 3.5%;
+  right: 26%;
 }
 
 #hamburger .bar {

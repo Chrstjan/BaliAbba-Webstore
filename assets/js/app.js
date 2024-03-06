@@ -4,6 +4,7 @@ const companyName = document.getElementById("company-name");
 const hamburgerBtn = document.getElementById("hamburger");
 const mainNav = document.getElementById("main-list");
 const shoppingCartElement = document.getElementById("basket-img");
+const cartAmount = document.getElementById("cartAmount");
 const domBody = document.body;
 
 //#region click eventListeners
@@ -36,6 +37,7 @@ function Init() {
   getCategoryData();
   getProductData();
   checkShoppingCart();
+  updateCartAmount();
 }
 
 //#endregion calling functions
@@ -250,6 +252,16 @@ function checkShoppingCart() {
   }
 }
 
+function updateCartAmount() {
+  const cartArray = getLocalStorage("cartArray");
+  const cartProductCount = cartArray.length;
+  cartAmount.textContent = cartProductCount;
+
+  if (cartProductCount === 0) {
+    cartAmount.textContent = "";
+  }
+}
+
 function updateShoppingCart(productToAdd) {
   let shoppingCartArray = getLocalStorage("cartArray");
 
@@ -257,6 +269,7 @@ function updateShoppingCart(productToAdd) {
   setLocalStorage("cartArray", shoppingCartArray);
 
   checkShoppingCart();
+  updateCartAmount();
 }
 
 function showShoppingCart() {
@@ -279,6 +292,7 @@ function removeFromCart(clickedProduct) {
 
     checkShoppingCart();
   }
+  updateCartAmount();
 }
 
 function categoryCallback(clickedSubCategory) {
