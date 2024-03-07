@@ -592,7 +592,7 @@ function buildProductDetails(productId) {
     });
 
     let detailedProductCard = `
-        <figure class="product-card">
+        <figure class="product-card product-card-details">
             <header><h2>${clickedProduct.title}</h2></header>
             <img src="${clickedProduct.thumbnail}">
             <figcaption>
@@ -606,8 +606,9 @@ function buildProductDetails(productId) {
                     </span>
                     <p>(${randRatingAmount} reviews)</p>
                 </span>
-                <h4>${clickedProduct.price} £</h4>
-                <span class="price">
+                <div class="product-price-container">
+                  <h4>${clickedProduct.price} £</h4>
+                  <span class="price">
                     <div class="amount">
                         <button id="subtract-btn">-</button>
                         <p class="amount-text">1</p>
@@ -615,11 +616,12 @@ function buildProductDetails(productId) {
                     </div>
                     <button onclick="cartCallback(${clickedProduct.id})">Add to cart
                     </button>
-                </span>
-                <h3>${clickedProduct.description}</h3>
-                <footer>
+                  </span>
+                  <h3>${clickedProduct.description}</h3>
+                  <footer>
                     <h5>${clickedProduct.stock} in stock</h5>
-                </footer>
+                  </footer>
+                </div>
             </figcaption>
         </figure>`;
     cardsContainer.innerHTML += backBtn;
