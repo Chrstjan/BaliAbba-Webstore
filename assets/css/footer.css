@@ -1,46 +1,80 @@
 .main-footer {
-    background: #1C1C1C;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
+  background: #1c1c1c;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-footer h3,
 .main-footer h4 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
 .contact-info,
 .FAQ {
-    padding: 0;
-    padding: 0rem 0.7rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  padding: 0;
+  padding: 0rem 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.FAQ li:hover {
+  scale: 1.1;
 }
 
 .follow-us {
-    padding: 0;
-    padding: 0rem 0.7rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.6rem;
+  padding: 0;
+  padding: 0rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.follow-us li .soMe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-footer .contact-info li,
+.FAQ li,
 .FAQ li a,
-.follow-us li{
-    list-style-type: none;
-    color: #fff;
-    text-decoration: none;
+.follow-us li {
+  list-style-type: none;
+  color: #fff;
+  text-decoration: none;
+}
+
+.soMe-container img:hover {
+  cursor: pointer;
+  scale: 1.1;
 }
 
 .facebook-soMe,
 .instagram-soMe,
 .linkedin-soMe {
-    width: 8vw;
+  width: 8vw;
 }
+
+.facebook-soMe,
+.instagram-soMe {
+  filter: invert(100%);
+}
+
+/*#region desktop  */
+@media (min-width: 1200px) {
+  .main-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .soMe-container img {
+    width: 4vw;
+  }
+}
+/*#endregion desktop  */

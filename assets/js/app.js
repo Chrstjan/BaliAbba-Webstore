@@ -1,9 +1,16 @@
 //#region GLOBAL code
 const cardsContainer = document.getElementById("cardsContainer");
+const companyName = document.getElementById("company-name");
 const hamburgerBtn = document.getElementById("hamburger");
 const mainNav = document.getElementById("main-list");
 const shoppingCartElement = document.getElementById("basket-img");
+const cartAmount = document.getElementById("cartAmount");
 const domBody = document.body;
+
+//#region click eventListeners
+companyName.addEventListener("click", () => {
+  buildProductCard(featuredProductsArray);
+});
 
 hamburgerBtn.addEventListener("click", () => {
   mainNav.classList.toggle("show-nav");
@@ -11,24 +18,33 @@ hamburgerBtn.addEventListener("click", () => {
 });
 
 shoppingCartElement.addEventListener("click", () => {
-  retrieveLocalStorage();
+  showShoppingCart();
 });
+//#endregion click eventListeners//
 
+//#region arrays
 let navigationArray = [];
 let allProducts = null;
+let featuredProductsArray = [];
 let productsInCart = [];
+//#endregion arrays
 
 //#region calling functions
-buildLoadingAnimation();
-getCategoryData();
-getProductData();
+Init();
+
+function Init() {
+  buildLoadingAnimation();
+  getCategoryData();
+  getProductData();
+  checkShoppingCart();
+  updateCartAmount();
+}
 
 //#endregion calling functions
 
 //#endregion GLOBAL code
 
 //#region model code
-
 function getCategoryData() {
   fetch("https://dummyjson.com/products/categories?limit=0")
     .then((response) => {
@@ -60,6 +76,16 @@ function getProductData() {
     .catch((error) => {
       console.log("Error fetching product data:", error);
     });
+}
+
+function getLocalStorage(key) {
+  let localData = localStorage.getItem(key);
+  return JSON.parse(localData || "[]");
+}
+
+function setLocalStorage(key, value) {
+  let serializedValue = JSON.stringify(value);
+  localStorage.setItem(key, serializedValue);
 }
 
 //#endregion model code
@@ -178,7 +204,6 @@ function recivedProductData(productData) {
   console.log(allProducts);
 
   //Random featured products
-  const featuredProductsArray = [];
   featuredProductsArray.push(
     allProducts[2],
     allProducts[Math.floor(Math.random() * allProducts.length)],
@@ -191,6 +216,8 @@ function recivedProductData(productData) {
 function navigationCallBack(clickedCategory) {
   if (clickedCategory == "all") {
     buildProductCard(allProducts);
+  } else if (clickedCategory == "allCategories") {
+    buildCategoryCard(navigationArray);
   } else {
     let clickedSubCategoryArray = [];
 
@@ -209,31 +236,50 @@ function navigationCallBack(clickedCategory) {
 function cartCallback(clickedProduct) {
   // console.log(clickedProduct);
 
-  let shoppingCart = localStorage.getItem("cartArray");
-  let shoppingCartArray = JSON.parse(shoppingCart || "[]");
-
   let productToAdd = allProducts.find(
     (product) => product.id == clickedProduct
   );
 
   if (productToAdd) {
-    shoppingCartArray.push(productToAdd);
-    let cartArray_seriallized = JSON.stringify(shoppingCartArray);
-    localStorage.setItem("cartArray", cartArray_seriallized);
+    updateShoppingCart(productToAdd);
   }
+}
 
-  // allProducts.forEach((products) => {
-  //   if (products.id == clickedProduct) {
-  //     productsInCart.push(products);
-  //   }
-  // });
+function checkShoppingCart() {
+  const cartArray = getLocalStorage("cartArray");
+  if (!cartArray || cartArray.length === 0) {
+    displayEmptyCartMessage();
+  }
+}
 
-  // console.log(productsInCart);
+function updateCartAmount() {
+  const cartArray = getLocalStorage("cartArray");
+  const cartProductCount = cartArray.length;
+  cartAmount.textContent = cartProductCount;
+
+  if (cartProductCount === 0) {
+    cartAmount.textContent = "";
+  }
+}
+
+function updateShoppingCart(productToAdd) {
+  let shoppingCartArray = getLocalStorage("cartArray");
+
+  shoppingCartArray.push(productToAdd);
+  setLocalStorage("cartArray", shoppingCartArray);
+
+  checkShoppingCart();
+  updateCartAmount();
+}
+
+function showShoppingCart() {
+  let shoppingCartArray = getLocalStorage("cartArray");
+  checkShoppingCart();
+  buildShoppingCart(shoppingCartArray);
 }
 
 function removeFromCart(clickedProduct) {
-  let shoppingCart = localStorage.getItem("cartArray");
-  let shoppingCartArray = JSON.parse(shoppingCart || "[]");
+  let shoppingCartArray = getLocalStorage("cartArray");
 
   const productToRemove = shoppingCartArray.findIndex(
     (product) => product.id == clickedProduct
@@ -241,10 +287,12 @@ function removeFromCart(clickedProduct) {
 
   if (productToRemove !== -1) {
     shoppingCartArray.splice(productToRemove, 1);
+    setLocalStorage("cartArray", shoppingCartArray);
+    buildShoppingCart(shoppingCartArray);
 
-    localStorage.setItem("cartArray", JSON.stringify(shoppingCartArray));
-    retrieveLocalStorage();
+    checkShoppingCart();
   }
+  updateCartAmount();
 }
 
 function categoryCallback(clickedSubCategory) {
@@ -258,14 +306,44 @@ function categoryCallback(clickedSubCategory) {
   buildProductCard(clickedProductCategory);
 }
 
-function retrieveLocalStorage() {
-  let shoppingCart = localStorage.getItem("cartArray");
+function breadcrumbCallback(breadcrumb) {
+  const filteredProducts = allProducts.filter(
+    (product) => product.category === breadcrumb
+  );
+  buildProductCard(filteredProducts);
+  //#region old hardcoded code
+  /*let breadcrumbArray = [];
+  allProducts.forEach((product) => {
+    if (product.category == breadcrumb) {
+      switch (breadcrumb) {
+        case "smartphones": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
 
-  let shoppingCartArray = JSON.parse(shoppingCart);
+        case "laptops": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
 
-  // console.log(shoppingCartArray);
+        case "fragrances": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
 
-  buildShoppingCart(shoppingCartArray);
+        case "skincare": {
+          breadcrumbArray.push(product);
+          buildProductCard(breadcrumbArray);
+          break;
+        }
+      }
+    }
+  });
+  console.log(breadcrumbArray); */
+  //#endregion old code
 }
 
 function removeLoadingAnimation() {
@@ -295,27 +373,64 @@ function buildSidebar(categoryData) {
   let topNavigation = `<input class="search-bar" type="text" placeholder="Search Product" min-length="1" max-length="32" />`;
   let subTopNavigation = `
     <span class="top-nav">
-      <li class="sidebar-nav"><button>Home</button></li>
-      <li class="sidebar-nav"><button>Categories</button></li>
+      <li class="sidebar-nav"><button onclick="buildProductCard(featuredProductsArray)">Home</button></li>
+      <li class="sidebar-nav"><button onclick="navigationCallBack('allCategories')">Categories</button></li>
       <li class="sidebar-nav"><button>Login</button></li>
     </span>`;
-  let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('all')">All Products</button></li>`;
+  let navigation = `
+    <li class="sidebar-category">
+      <button onclick="navigationCallBack('all')">All Products</button>
+    </li>`;
   mainNav.innerHTML += topNavigation;
   mainNav.innerHTML += subTopNavigation;
   mainNav.innerHTML += navigation;
 
   categoryData.forEach((category) => {
-    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category.subCategory}')">${category.supCategory}</button></li>`;
+    let navigation = `
+      <li class="sidebar-category">
+        <button onclick="navigationCallBack('${category.subCategory}')">
+          ${category.supCategory}
+        </button>
+        <ul class="sub-categories-list">
+          <li class="sidebar-sub-category">
+            <button onclick="navigationCallBack('${category.subCategory}')">
+              ${category.subCategory}
+            </button>
+          </li>
+        </ul>
+      </li>`;
 
     mainNav.innerHTML += navigation;
   });
+}
+
+function displayEmptyCartMessage() {
+  cardsContainer.innerHTML = "";
+
+  let emptyMessage = `
+    <article class="empty-cart-container">
+      <header>
+        <h3>Whoops your cart is empty!</h3>
+      </header>
+      <p>Check out some of our featured products</p>
+      <div class="product-container">
+        <button onclick="buildProductCard(featuredProductsArray)">See Products</button>
+      </div>
+    </article>`;
+  cardsContainer.innerHTML += emptyMessage;
 }
 
 function buildShoppingCart(shoppingCart) {
   //console.log(shoppingCart);
   cardsContainer.innerHTML = "";
 
+  checkShoppingCart();
+
+  let shoppingCartContainer = document.createElement("div");
+  shoppingCartContainer.classList.add("shopping-cart-container");
+
   let totalPrice = 0;
+  const randRatingAmount = Math.floor(Math.random() * 3500 + 1);
 
   shoppingCart.forEach((product) => {
     let cartProduct = `
@@ -328,6 +443,16 @@ function buildShoppingCart(shoppingCart) {
           <img src="${product.thumbnail}" alt="${product.title}" />
         </div>
         <figcaption>
+          <span class="description-container">
+            <h5>${product.description}</h5>
+            <span class="rating-container">
+                    <span class="star-amount">
+                        <p>${product.rating}</p>
+                        <p class="star">&starf;</p>
+                    </span>
+                    <p>(${randRatingAmount} reviews)</p>
+                </span>
+          </span>
           <span class="btn-container">
             <div class="add-subtract-container">
               <button id="subtract-btn">-</button>
@@ -344,23 +469,23 @@ function buildShoppingCart(shoppingCart) {
         </figcaption>
       </figure>
     `;
-    cardsContainer.innerHTML += cartProduct;
+    shoppingCartContainer.innerHTML += cartProduct;
 
     totalPrice += parseFloat(product.price);
   });
 
   let cartPrice = `
-      <section>
-       <header>
+      <section class="total-price-container">
+       <header class="total-price">
          <h4>Vat:</h4>
-          <span><p>${totalPrice} £</p></span>
+         <span><p>${totalPrice} £</p></span>
         </header>
-        <div>
+        <div class="discount-container">
           <header><h3>Add giftcard or campaign code</h3></header>
-          <input type="text" placholder="Input Code *" />
-          <button type="submit">Add</button>
+          <input type="text" placeholder="Input Code *" />
+          <button type="submit" class="submit-btn">Add</button>
         </div>
-        <footer>
+        <footer class="total-price-footer">
           <h3>Total:</h3>
           <span>
             <p>${totalPrice} £</p>
@@ -368,13 +493,14 @@ function buildShoppingCart(shoppingCart) {
         </footer>
       </section>`;
 
-  cardsContainer.innerHTML += cartPrice;
+  shoppingCartContainer.innerHTML += cartPrice;
 
   let checkout = `
-    <footer>
+    <footer class="checkout-container">
       <button>Checkout</button>
     </footer>`;
-  cardsContainer.innerHTML += checkout;
+  shoppingCartContainer.innerHTML += checkout;
+  cardsContainer.appendChild(shoppingCartContainer);
 }
 
 function buildCategoryCard(subCategories) {
@@ -455,6 +581,8 @@ function buildProductDetails(productId) {
   }
 
   function buildCard(clickedProduct) {
+    let backBtn = `<button onclick="breadcrumbCallback('${clickedProduct.category}')" class="back-btn">&larr;</button>`;
+
     const randRatingAmount = Math.floor(Math.random() * 3500 + 1);
     let smallProductImages = clickedProduct.images;
 
@@ -464,7 +592,7 @@ function buildProductDetails(productId) {
     });
 
     let detailedProductCard = `
-        <figure class="product-card">
+        <figure class="product-card product-card-details">
             <header><h2>${clickedProduct.title}</h2></header>
             <img src="${clickedProduct.thumbnail}">
             <figcaption>
@@ -478,8 +606,9 @@ function buildProductDetails(productId) {
                     </span>
                     <p>(${randRatingAmount} reviews)</p>
                 </span>
-                <h4>${clickedProduct.price} £</h4>
-                <span class="price">
+                <div class="product-price-container">
+                  <h4>${clickedProduct.price} £</h4>
+                  <span class="price">
                     <div class="amount">
                         <button id="subtract-btn">-</button>
                         <p class="amount-text">1</p>
@@ -487,14 +616,16 @@ function buildProductDetails(productId) {
                     </div>
                     <button onclick="cartCallback(${clickedProduct.id})">Add to cart
                     </button>
-                </span>
-                <h3>${clickedProduct.description}</h3>
-                <footer>
+                  </span>
+                  <h3>${clickedProduct.description}</h3>
+                  <footer>
                     <h5>${clickedProduct.stock} in stock</h5>
-                </footer>
+                  </footer>
+                </div>
             </figcaption>
         </figure>`;
-    cardsContainer.innerHTML = detailedProductCard;
+    cardsContainer.innerHTML += backBtn;
+    cardsContainer.innerHTML += detailedProductCard;
   }
 }
 
