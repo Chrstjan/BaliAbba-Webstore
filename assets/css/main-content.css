@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  /* overflow: hidden; */
 }
 
 #cardsContainer .back-btn {
@@ -414,7 +415,7 @@
   /*#endregion product cards  */
 
   #cardsContainer .cart-product {
-    max-height: 201px;
+    width: 900px;
     display: flex;
     flex-direction: row;
     justify-content: center;
