@@ -9,7 +9,7 @@
 #cardsContainer .back-btn {
   position: absolute;
   left: 1%;
-  top: 15%;
+  top: 4%;
   border: 0;
   background: transparent;
   font-size: 24px;
@@ -17,6 +17,7 @@
   border-radius: 50px;
   color: #eee;
   padding: 0.02rem 0.2rem;
+  cursor: pointer;
 }
 
 /*#region animation  */
@@ -143,6 +144,7 @@
   border: 0;
   padding: 0.5rem 0.7rem;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .btn-container .remove-container {
@@ -153,6 +155,7 @@
 
 #remove-btn {
   background: #ff0707;
+  cursor: pointer;
 }
 
 #cardsContainer .shopping-cart-container {
@@ -185,6 +188,7 @@
   border: 0;
   background: transparent;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .total-price-container .total-price-footer {
@@ -203,6 +207,7 @@
   color: #fff;
   border-radius: 30px;
   padding: 0.5rem 0.7rem;
+  cursor: pointer;
 }
 
 /*#endregion shoppingCart product  */
@@ -242,6 +247,7 @@
   height: 100%;
   font-size: 16px;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 /*#endregion category  */
@@ -257,6 +263,19 @@
   border-radius: 10px;
   padding: 0rem 0.5rem;
   background: #eeeeee;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  scale: 1.01;
+}
+
+.product-card-details:hover {
+  scale: none;
+}
+
+#cardsContainer .product-card-details {
+  cursor: default;
 }
 
 .product-card header {
@@ -277,6 +296,11 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
+}
+
+.small-images img:hover {
+  scale: 1.1;
 }
 
 .product-card figcaption .small-images .small-img {
@@ -328,6 +352,7 @@
   background: #d9d9d9;
   text-align: center;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .product-card figcaption h4,
@@ -342,6 +367,7 @@
   background: #85d360;
   border: 0;
   box-shadow: 0.2px 3px #00000033;
+  cursor: pointer;
 }
 
 .product-card footer {
@@ -364,6 +390,8 @@
     padding: 0.2rem 0.4rem;
   }
 
+  /*#region product cards  */
+
   #cardsContainer .product-card {
     flex: 1;
     max-width: 350px;
@@ -382,6 +410,51 @@
     border-radius: 10px;
     padding: 0rem 0.5rem;
     background: #eeeeee;
+  }
+  /*#endregion product cards  */
+
+  #cardsContainer .cart-product {
+    max-height: 201px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cart-product .header-container {
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cart-product img {
+    width: 3vw;
+    height: 4vw;
+  }
+
+  .cart-product figcaption {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cart-product figcaption .description-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cart-product .btn-container .product-price {
+    padding-right: 0.4rem;
+  }
+
+  .cart-product figcaption .remove-container {
+    left: -4%;
+    top: 35%;
   }
 }
 /*#endregion desktop  */

@@ -73,6 +73,7 @@ body.no-scroll {
   background: transparent;
   color: #fff;
   font-size: 27px;
+  cursor: pointer;
 }
 
 /*#endregion sidebar  */
@@ -90,6 +91,11 @@ body.no-scroll {
 .main-header h1 {
   padding-left: 0.6rem;
   z-index: 999;
+  cursor: pointer;
+}
+
+.main-header h1:hover {
+  scale: 1.1;
 }
 
 .main-header .main-nav {
@@ -107,6 +113,12 @@ body.no-scroll {
 
 .main-nav #login-icon {
   display: none;
+  z-index: 999;
+  cursor: pointer;
+}
+
+#login-icon:hover {
+  scale: 1.1;
 }
 
 .main-nav figure {
@@ -124,14 +136,22 @@ body.no-scroll {
   color: #000;
   border-radius: 100%;
   padding: 0rem 0.4rem;
-  /* display: none; */
+  cursor: pointer;
+}
+
+#cartAmount:hover {
+  scale: 1.1;
 }
 
 .main-nav #basket-img {
   filter: invert(100%);
-  /* padding-right: 0.6rem; */
   width: 10vw;
   z-index: 999;
+  cursor: pointer;
+}
+
+#basket-img:hover {
+  scale: 1.1;
 }
 
 .main-nav #hamburger {
@@ -140,6 +160,11 @@ body.no-scroll {
   position: absolute;
   top: 3.5%;
   right: 26%;
+  cursor: pointer;
+}
+
+#hamburger:hover {
+  scale: 1.1;
 }
 
 #hamburger .bar {
