@@ -386,7 +386,19 @@ function buildSidebar(categoryData) {
   mainNav.innerHTML += navigation;
 
   categoryData.forEach((category) => {
-    let navigation = `<li class="sidebar-category"><button onclick="navigationCallBack('${category.subCategory}')">${category.supCategory}</button></li>`;
+    let navigation = `
+      <li class="sidebar-category">
+        <button onclick="navigationCallBack('${category.subCategory}')">
+          ${category.supCategory}
+        </button>
+        <ul class="sub-categories-list">
+          <li class="sidebar-sub-category">
+            <button onclick="navigationCallBack('${category.subCategory}')">
+              ${category.subCategory}
+            </button>
+          </li>
+        </ul>
+      </li>`;
 
     mainNav.innerHTML += navigation;
   });
