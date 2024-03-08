@@ -233,9 +233,28 @@ function navigationCallBack(clickedCategory) {
   }
 }
 
+function subCategoryCallback(clickedSubCategory) {
+  // console.log(clickedSubCategory);
+  let combinedStrings = clickedSubCategory;
+  const seperator = ",";
+
+  const seperateStringsArray = combinedStrings.split(seperator);
+  // console.log(seperateStringsArray);
+
+  let subProductsArray = [];
+  allProducts.forEach((product) => {
+    seperateStringsArray.forEach((subCategory) => {
+      if (product.category.includes(subCategory.trim())) {
+        subProductsArray.push(product);
+      }
+    });
+  });
+  // console.log(subProductsArray);
+  buildProductCard(subProductsArray);
+}
+
 function cartCallback(clickedProduct) {
   // console.log(clickedProduct);
-
   let productToAdd = allProducts.find(
     (product) => product.id == clickedProduct
   );
@@ -393,9 +412,15 @@ function buildSidebar(categoryData) {
         </button>
         <ul class="sub-categories-list">
           <li class="sidebar-sub-category">
-            <button onclick="navigationCallBack('${category.subCategory}')">
-              ${category.subCategory}
-            </button>
+            ${category.subCategory
+              .map(
+                (subCat) => `
+              <button onclick="subCategoryCallback('${subCat}')">
+                ${subCat}
+              </button>
+            `
+              )
+              .join("")}
           </li>
         </ul>
       </li>`;
